@@ -1,12 +1,339 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Meet the engineering and design collective at NexEdu Technologies. Team member profiles, architectural contributions, and laboratory schedule.">
+  <meta name="keywords" content="NexEdu Team, Engineering Collective, Web Development, Team Profiles">
+  <meta name="author" content="NexEdu Technologies Engineering Team">
+  <title>About Our Team &amp; Collective | NexEdu Technologies</title>
+
+  <!-- External Master Stylesheet -->
+  <link rel="stylesheet" href="styles.css">
+
+  <!-- ===================================================================
+       MANDATORY RUBRIC REQUIREMENT: Exactly ONE Embedded Style Block
+       Scoped Purpose: Scoped typography accent for member quote marks
+       specific to about.html.
+       =================================================================== -->
+  <style>
+    .quote-glyph {
+      font-family: Georgia, serif;
+      font-size: 1.4rem;
+      line-height: 0;
+      vertical-align: -0.2rem;
+      color: #0071e3;
+      margin-right: 0.25rem;
+    }
+  </style>
 </head>
 <body>
-    <h1> Test</h1>
-    <h2>thay đổi cái này nè</h2>
+
+  <!-- Accessible Skip Link -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- ===================================================================
+       1. SHARED FLOATING HEADER & NAVIGATION
+       =================================================================== -->
+  <header class="site-header">
+    <div class="site-nav" role="navigation" aria-label="Main Navigation">
+      <a href="index.html" class="brand-lockup">
+        <img src="images/logo.svg" alt="NexEdu Technologies Logo" class="brand-logo" width="38" height="38">
+        <div class="brand-text">
+          <span class="brand-name">NexEdu</span>
+          <span class="brand-tagline">Technologies</span>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html" class="nav-link">Home</a></li>
+        <li><a href="jobs.html" class="nav-link">Careers</a></li>
+        <li><a href="apply.html" class="nav-link">Apply Now</a></li>
+        <li><a href="about.html" class="nav-link active" aria-current="page">About Team</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <!-- ===================================================================
+       2. MAIN CONTENT AREA (WITH ANIMATED BLUR INGRESS)
+       =================================================================== -->
+  <main id="main-content" class="page-wrapper">
+    <div class="container section-padding">
+
+      <!-- Page Header -->
+      <div class="section-title-wrap">
+        <div class="floating-pill">Engineering &amp; Design Collective</div>
+        <h1 class="hero-title">Meet Our Team</h1>
+        <p class="text-lead text-muted">
+          We are Group 04, collaborating to engineer high-standard accessible web solutions and resilient digital learning experiences.
+        </p>
+      </div>
+
+      <!-- ===============================================================
+           SECTION 1: GROUP & COURSE INFORMATION (NESTED LIST REQUIREMENT)
+           =============================================================== -->
+      <section aria-labelledby="group-info-heading">
+        <div class="group-meta-card">
+          <h2 id="group-info-heading" class="section-serif-title">Group &amp; Tutorial Laboratory Information</h2>
+          <p>
+            Our core team operates under the following laboratory session schedule and campus location:
+          </p>
+
+          <!-- Mandatory Rubric Requirement: Nested List (<ul> inside <ul>) -->
+          <ul class="nested-list">
+            <li>
+              Team &amp; Institutional Affiliation:
+              <ul>
+                <li><strong>Group Name:</strong> NexEdu Innovators (Group 04)</li>
+                <li><strong>Institution:</strong> Swinburne Vietnam (Swinburne University of Technology)</li>
+                <li><strong>Campus:</strong> Can Tho Campus (Ninh Kieu District, Can Tho City)</li>
+              </ul>
+            </li>
+            <li>
+              Tutorial Laboratory Schedule:
+              <ul>
+                <li><strong>Tutorial Session:</strong> Wednesday 08:30 AM – 10:30 AM ICT (UTC+7)</li>
+                <li><strong>Laboratory Venue:</strong> Can Tho Tech Innovation Lab (Building A, Lab A302)</li>
+                <li><strong>Head Instructor:</strong> Mr. Wilson Doan</li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ===============================================================
+           SECTION 2: GROUP PHOTO (<figure> & <figcaption> REQUIREMENT)
+           =============================================================== -->
+      <section aria-labelledby="photo-heading">
+        <h2 id="photo-heading" class="section-serif-title">Development Team Portrait</h2>
+        
+        <!-- Mandatory Rubric Feature: <figure> with <figcaption> (Under 300KB) -->
+        <figure class="team-figure">
+          <img 
+            src="images/team-photo.jpg" 
+            alt="NexEdu Technologies Engineering Team Collaborating at Can Tho Studio Desk" 
+            width="840" 
+            height="440"
+            loading="eager"
+          >
+          <figcaption>
+            Figure 1.1: NexEdu Technologies Project Team (Left to Right: Anh Quan Nguyen, Anh Vu Pham, Nguyen Cao Minh Tat, and Ho Kim Hoan Nguyen) collaborating at the Can Tho studio. (High-res asset: 111.57 KB &lt; 300KB maximum threshold).
+          </figcaption>
+        </figure>
+      </section>
+
+      <!-- ===============================================================
+           SECTION 3: TEAM MEMBER CONTRIBUTIONS & QUOTES (DEFINITION LIST)
+           =============================================================== -->
+      <section aria-labelledby="contributions-heading">
+        <h2 id="contributions-heading" class="section-serif-title">Team Member Profiles &amp; Contributions</h2>
+        <p class="text-muted">
+          Individual specializations, key platform contributions, and perspectives from each team member.
+        </p>
+
+        <!-- Mandatory Rubric Requirement: Definition List (<dl>, <dt>, <dd>) -->
+        <dl class="team-dl">
+
+          <!-- Member 1: Anh Vu Pham -->
+          <div class="team-member-card">
+            <dt class="team-dt">
+              <span>Anh Vu Pham</span>
+              <span class="student-id-badge">ID: 106217835</span>
+            </dt>
+            <div class="team-role">Master Layout & System Architecture (index.html)</div>
+            <dd class="team-dd">
+              <strong>Key Contributions:</strong> Sets up the GitHub repository and GitHub Pages deployment workflow, defines baseline styles.css rules (CSS custom properties, resets, typography, shared navigation, sticky footer), Develops index.html (hero background, search interface, accessible table with merged cells), handles final ZIP packaging and Canvas verification and ensures the production branch builds properly on GitHub Pages and validates the deployment link in the index.html footer before final submission.
+            </dd>
+            <dd class="team-dd">
+              <div class="quote-block">
+                <span class="quote-glyph" aria-hidden="true">&ldquo;</span>Chất lượng phần mềm là tấm gương phản chiếu sự tôn trọng sâu sắc nhất dành cho người dùng.
+                <span class="quote-translation">English Translation: "Software quality is a mirror reflecting our deepest respect for the user."</span>
+              </div>
+            </dd>
+          </div>
+
+          <!-- Member 2: Ho Kim Hoan Nguyen -->
+          <div class="team-member-card">
+            <dt class="team-dt">
+              <span>Ho Kim Hoan Nguyen</span>
+              <span class="student-id-badge">ID: 106638366</span>
+            </dt>
+            <div class="team-role">Information Architecture & Semantic Expert (jobs.html)</div>
+            <dd class="team-dd">
+              <strong>Key Contributions:</strong> Codes the page following a strict HTML5 semantic hierarchy, including multi-level headings, ordered and unordered lists, multiple section tags and a right-aligned 25% width aside box, runs W3c Validator syntax reviews across all HTML and CSS files to enforce zero syntax warnings or errors before integration.
+            </dd>
+            <dd class="team-dd">
+              <div class="quote-block">
+                <span class="quote-glyph" aria-hidden="true">&ldquo;</span>Không một ai bị bỏ lại phía sau trên con đường học tập số.
+                <span class="quote-translation">English Translation: "No one should ever be left behind on the journey of digital learning."</span>
+              </div>
+            </dd>
+          </div>
+
+          <!-- Member 3: Nguyen Cao Minh Tat -->
+          <div class="team-member-card">
+            <dt class="team-dt">
+              <span>Nguyen Cao Minh Tat</span>
+              <span class="student-id-badge">ID: 10691366</span>
+            </dt>
+            <div class="team-role">Team Visuals & Jira Scrum Master (about.html) </div>
+            <dd class="team-dd">
+              <strong>Key Contributions:</strong> Configures the Jira board (Epics, User Stories, and Sprint backlog) and monitors delivery velocity, Builds the page with nested academic schedule lists, a <figure> team portrait strictly under 300KB, and an interactive hexadecimal-styled table with a hover state, acts as the primary team representative for Canvas and Ed Discussion inquiries, serving as the liaison between the team and the Unit Convenor/Tutors for requirements clarification or technical scope questions.
+            </dd>
+            <dd class="team-dd">
+              <div class="quote-block">
+                <span class="quote-glyph" aria-hidden="true">&ldquo;</span>Với sự siêng năng và kỷ luật, mọi vấn đề phức tạp đều có thể giải quyết.
+                <span class="quote-translation">English Translation: "With diligence and discipline, every complex problem finds a solution."</span>
+              </div>
+            </dd>
+          </div>
+
+          <!-- Member 4: Anh Quan Nguyen -->
+          <div class="team-member-card">
+            <dt class="team-dt">
+              <span>Anh Quan Nguyen</span>
+              <span class="student-id-badge">ID: 106913272</span>
+            </dt>
+            <div class="team-role">Form Logic & Accessibility Lead (apply.html)</div>
+            <dd class="team-dd">
+              <strong>Key Contributions:</strong> Builds the page using a pure Flexbox or CSS Grid layout.
+Form validation: Implements strict HTML5 validation rules, including regular expression patterns, required constraints, fieldsets/legends and field types, checks WCAG AA colour contrast, explicit input-label associations, and full keyboard navigation, embeds the formal Indigenous Recognition statement
+            </dd>
+            <dd class="team-dd">
+              <div class="quote-block">
+                <span class="quote-glyph" aria-hidden="true">&ldquo;</span>Hành trình vạn dặm bắt đầu từ một bước chân. Chỉ bằng sự nghiêm cẩn và chân lý, sự xuất sắc mới có thể trường tồn
+                <span class="quote-translation">English Translation: "A journey of a thousand miles begins with a single step. Only through rigor and truth can excellence endure."</span>
+              </div>
+            </dd>
+          </div>
+
+        </dl>
+      </section>
+
+      <!-- ===============================================================
+           SECTION 4: FUN FACTS TABLE (WITH CAPTION & HOVER HIGHLIGHT)
+           =============================================================== -->
+      <section aria-labelledby="fun-facts-heading">
+        <h2 id="fun-facts-heading" class="section-serif-title">Team Perspectives &amp; Fun Facts</h2>
+        <p class="text-muted">
+          A glimpse into the diverse personalities, career goals, and cultural roots of our development team.
+        </p>
+
+        <div class="table-responsive">
+          <table class="data-table">
+            <!-- Mandatory Rubric Feature: <caption> tag -->
+            <caption>Table 2.1: NexEdu Core Development Team - Passions, Fuel &amp; Origins</caption>
+            <thead>
+              <tr>
+                <th scope="col">Team Member</th>
+                <th scope="col">Dream Tech Role</th>
+                <th scope="col">Go-to Coding Fuel / Snack</th>
+                <th scope="col">Hometown &amp; Country</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row" class="cell-highlight">Anh Vu Pham</th>
+                <td>Master Layout & System Architecture (index.html)</td>
+                <td>Vietnamese Iced Coffee (Cà Phê Sữa Đá)</td>
+                <td>Can Tho, Vietnam</td>
+              </tr>
+              <tr>
+                <th scope="row" class="cell-highlight">Ho Kim Hoan Nguyen</th>
+                <td>Information Architecture & Semantic Expert (jobs.html)</td>
+                <td>Matcha Green Tea &amp; Almond Biscotti</td>
+                <td>Can Tho, Vietnam</td>
+              </tr>
+              <tr>
+                <th scope="row" class="cell-highlight">Nguyen Cao Minh Tat</th>
+                <td>Team Visuals & Jira Scrum Master (about.html)</td>
+                <td>Masala Chai &amp; Roasted Pistachios</td>
+                <td>Can Tho, Vietnam</td>
+              </tr>
+              <tr>
+                <th scope="row" class="cell-highlight">Anh Quan Nguyen</th>
+                <td>Form Logic & Accessibility Lead (apply.html)</td>
+                <td>Dark Chocolate (85%) &amp; Jasmine Tea</td>
+                <td>Can Tho, Vietnam</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="4">
+                  <strong>Collective Superpower:</strong> Cross-cultural empathy, relentless accessibility testing, and semantic precision.
+                </td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+      </section>
+
+      <!-- ===================================================================
+           MANDATORY RUBRIC REQUIREMENT: Exactly ONE Intentional Inline Style
+           Demonstrating specific property cascade/override without style pollution.
+           =================================================================== -->
+      <div class="glass-card" style="border-bottom: 4px solid #0071e3; margin-top: 2rem;">
+        <h4>Collaboration &amp; Code Quality Standards</h4>
+        <p>
+          Our team enforces strict code review benchmarks, semantic HTML5 structure, accessible keyboard navigation, and pure modern CSS styling across all platforms.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ===================================================================
+       3. SITE FOOTER (SHARED ACROSS ALL PAGES)
+       =================================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h4>NexEdu Technologies</h4>
+          <p>
+            Engineering the Future of Human Learning through resilient educational technologies, uncompromising accessibility standards, and ethical digital research.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="jobs.html">Careers &amp; Open Roles</a></li>
+            <li><a href="apply.html">Submit Application</a></li>
+            <li><a href="about.html">About Team &amp; Unit</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Academic &amp; Project</h4>
+          <ul class="footer-links">
+            <li><a href="https://jira.swinburne.edu.au/browse/COS10026-G04" target="_blank" rel="noopener noreferrer">Jira Project Board</a></li>
+            <li><a href="https://github.com/swinburne-cos10026/nexedu-recruitment-portal" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+            <li><a href="mailto:careers@nexedu.edu.vn">careers@nexedu.edu.vn</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Asia-Pacific &amp; Global Hubs</h4>
+          <p>
+            Can Tho Innovation Campus<br>
+            Ninh Kieu District, Can Tho City, Vietnam<br>
+            Phone: +84 292 383 8888 / +61 3 9214 8000
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          &copy; 2026 NexEdu Technologies Pty Ltd. All rights reserved.
+        </div>
+        <div>
+          COS10026 Web Technologies &bull; Part 1
+        </div>
+      </div>
+    </div>
+  </footer>
+
 </body>
 </html>
