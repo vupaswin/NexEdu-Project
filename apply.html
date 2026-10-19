@@ -52,7 +52,7 @@
   <header class="site-header">
     <div class="site-nav" role="navigation" aria-label="Main Navigation">
       <a href="index.html" class="brand-lockup">
-        <img src="images/logo.svg" alt="NexEdu Technologies Logo" class="brand-logo" width="38" height="38">
+        <img src="images/NexEdu-Logo-cut.png" alt="NexEdu Technologies Logo" class="brand-logo" width="38" height="38">
         <div class="brand-text">
           <span class="brand-name">NexEdu</span>
           <span class="brand-tagline">Technologies</span>
@@ -238,5 +238,150 @@
               </div>
             </div>
           </fieldset>
+          <!-- =============================================================
+               FIELDSET 3: RESIDENTIAL ADDRESS
+               ============================================================= -->
+          <fieldset>
+            <legend>3. Residential Address</legend>
+
+            <div class="form-group">
+              <label for="address" class="form-label">
+                <span>Street Address <span class="required-star" aria-hidden="true">*</span></span>
+                <span class="form-hint">Maximum 40 characters</span>
+              </label>
+              <input 
+                type="text" 
+                id="address" 
+                name="address" 
+                class="form-control" 
+                maxlength="40" 
+                placeholder="e.g. 42 Innovation Way, Apartment 3B" 
+                required 
+                aria-required="true"
+              >
+            </div>
+
+            <div class="form-grid-3">
+              <div class="form-group">
+                <label for="suburb" class="form-label">
+                  <span>Suburb / Town <span class="required-star" aria-hidden="true">*</span></span>
+                  <span class="form-hint">Maximum 40 characters</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="suburb" 
+                  name="suburb" 
+                  class="form-control" 
+                  maxlength="40" 
+                  placeholder="e.g. Hawthorn" 
+                  required 
+                  aria-required="true"
+                >
+              </div>
+
+              <div class="form-group">
+                <label for="state" class="form-label">
+                  <span>State / Territory <span class="required-star" aria-hidden="true">*</span></span>
+                  <span class="form-hint">Australian jurisdiction</span>
+                </label>
+                <select id="state" name="state" class="form-control" required aria-required="true">
+                  <option value="" disabled selected>Select State...</option>
+                  <option value="VIC">VIC - Victoria</option>
+                  <option value="NSW">NSW - New South Wales</option>
+                  <option value="QLD">QLD - Queensland</option>
+                  <option value="NT">NT - Northern Territory</option>
+                  <option value="WA">WA - Western Australia</option>
+                  <option value="SA">SA - South Australia</option>
+                  <option value="TAS">TAS - Tasmania</option>
+                  <option value="ACT">ACT - Australian Capital Territory</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="postcode" class="form-label">
+                  <span>Postcode <span class="required-star" aria-hidden="true">*</span></span>
+                  <span class="form-hint">Exactly 4 digits</span>
+                </label>
+                <input 
+                  type="text" 
+                  id="postcode" 
+                  name="postcode" 
+                  class="form-control" 
+                  pattern="\d{4}" 
+                  maxlength="4" 
+                  placeholder="3122" 
+                  required 
+                  aria-required="true"
+                >
+              </div>
+            </div>
+          </fieldset>
+          <!-- =============================================================
+               FIELDSET 4: TECHNICAL SKILLS & PROFICIENCIES
+               ============================================================= -->
+          <fieldset>
+            <legend>4. Technical Competencies &amp; Experience</legend>
+
+            <div class="form-group">
+              <span class="form-label">
+                <span>Core Competency Checkbox Group <span class="form-hint">(Select all that apply)</span></span>
+              </span>
+              <div class="choice-group">
+                <label class="choice-label" for="skill_html5">
+                  <input type="checkbox" id="skill_html5" name="skills[]" value="HTML5">
+                  <span>HTML5 Semantic Architecture</span>
+                </label>
+
+                <label class="choice-label" for="skill_css3">
+                  <input type="checkbox" id="skill_css3" name="skills[]" value="CSS3 Grid/Flexbox">
+                  <span>CSS3 Grid / Flexbox Layouts</span>
+                </label>
+
+                <label class="choice-label" for="skill_wcag">
+                  <input type="checkbox" id="skill_wcag" name="skills[]" value="Accessibility/WCAG">
+                  <span>Accessibility / WCAG 2.1 AA</span>
+                </label>
+
+                <label class="choice-label" for="skill_uiux">
+                  <input type="checkbox" id="skill_uiux" name="skills[]" value="UI/UX Research">
+                  <span>UI/UX Pedagogical Research</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- The ONLY Optional Field as Mandated by Specifications -->
+            <div class="form-group">
+              <label for="other_skills" class="form-label">
+                <span>Other Relevant Skills, Tooling &amp; Certifications</span>
+                <span class="form-hint">(Optional)</span>
+              </label>
+              <textarea 
+                id="other_skills" 
+                name="other_skills" 
+                class="form-control" 
+                rows="4" 
+                placeholder="Detail additional competencies (e.g. Golang, Kubernetes, Docker, Figma design systems, CPACC accessibility certification)..."
+              ></textarea>
+            </div>
+          </fieldset>
+
+          <!-- Form Actions & Submission Buttons -->
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary">Submit Application</button>
+            <button type="reset" class="btn btn-secondary">Reset Form</button>
+          </div>
+        </form>
+      </div>
+      <!-- Using at least one inline style in the HTML and this is the stuff below -->
+      <div class="glass-card" style="max-width: 840px; margin: 2rem auto 0; border-left: 4px solid #0071e3;">
+        <h4>Secure Application Transmission</h4>
+        <p>
+          Form data submitted through this portal is transmitted securely via HTTP POST directly to the verification endpoint (<code>https://mercury.swin.edu.au/it000000/formtest.php</code>) in accordance with recruitment intake guidelines.
+        </p>
+      </div>
+
+    </div>
+  </main>
+
 </body>
 </html>
