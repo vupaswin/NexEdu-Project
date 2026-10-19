@@ -93,7 +93,7 @@
                 id="job_ref" 
                 name="job_ref" 
                 class="form-control" 
-                pattern="[A-Z]{2}[0-9]{3}" 
+                pattern="[A-Z]{2}\d{3}" 
                 maxlength="5" 
                 placeholder="e.g. ED101" 
                 required 
@@ -112,7 +112,8 @@
                   <span>First Name <span class="required-star" aria-hidden="true">*</span></span>
                   <span class="form-hint">Max 20 alpha characters</span>
                 </label>
-                <!-- THIS IS FOR VIETNAMESE:(pattern="[a-zA-ZÀ-ÖØ-öø-ÿĀ-ỹ\s]+") -->
+                <!-- THIS IS FOR VIETNAMESE:(pattern="[a-zA-ZÀ-ÖØ-öø-ÿĀ-ỹ\s]+")
+                 still have some issues and i am trying to make i better -->
                 <input 
                   type="text" 
                   id="first_name" 
@@ -188,7 +189,7 @@
                   id="phone" 
                   name="phone" 
                   class="form-control" 
-                  pattern="[0-9\s]{8,12}" 
+                  pattern="[\d\s]{8,12}" 
                   placeholder="0412 345 678" 
                   required 
                   aria-required="true"
@@ -419,3 +420,5 @@
 
 </body>
 </html>
+<!-- The Apply html now is all prepared with class and id.
+The CSS will help the page look better. -->
