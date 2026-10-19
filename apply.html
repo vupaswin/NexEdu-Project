@@ -86,7 +86,7 @@
             <div class="form-group">
               <label for="job_ref" class="form-label">
                 <span>Job Reference Number <span class="required-star" aria-hidden="true">*</span></span>
-                <span class="form-hint">Exactly 5 alphanumeric characters (e.g. ED101, UX204)</span>
+                <span class="form-hint">Exactly 5 alphanumeric characters and the first 2 words must be upper case (e.g. ED101, UX204)</span>
               </label>
               <input 
                 type="text" 
@@ -137,7 +137,7 @@
                   name="last_name" 
                   class="form-control" 
                   maxlength="20" 
-                  pattern="[A-Za-z\s]+" 
+                  pattern="[a-zA-ZÀ-ÖØ-öø-ÿĀ-ỹ\s]+" 
                   placeholder="e.g. Mercer" 
                   required 
                   aria-required="true"
@@ -189,7 +189,7 @@
                   id="phone" 
                   name="phone" 
                   class="form-control" 
-                  pattern="[\d\s]{8,12}" 
+                  pattern="[\d\s]+{8,12}" 
                   placeholder="0412 345 678" 
                   required 
                   aria-required="true"
