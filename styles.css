@@ -228,3 +228,50 @@ p {
   color: var(--color-gray-dark);
   font-weight: 400;
 }
+/*BUTTONS & INTERACTIVE PILLS*/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.825rem 1.85rem;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-smooth);
+}
+
+.btn-primary {
+  background-color: var(--color-apple-blue);
+  color: var(--color-white);
+  border-color: var(--color-apple-blue);
+  box-shadow: 0 4px 16px rgba(0, 113, 227, 0.28);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-blue-dark);
+  border-color: var(--color-blue-dark);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 113, 227, 0.35);
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-dark);
+  border: 1px solid var(--color-sky-border);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-white);
+  border-color: var(--color-apple-blue);
+  color: var(--color-apple-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-subtle);
+}
