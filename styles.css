@@ -65,6 +65,36 @@
 }
 
 /* --------------------------------------------------------------------------
+   2. LAG-FREE PAGE TRANSITION ENGINE (NO BLUR OVERHEAD)
+   Pure Hardware-Accelerated Fade & Translate Ingress (Smooth 60/120fps)
+   -------------------------------------------------------------------------- */
+@keyframes pageFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(0, 113, 227, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(0, 113, 227, 0);
+  }
+}
+
+.page-wrapper {
+  flex: 1 0 auto;
+  animation: pageFadeIn 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+
+/* --------------------------------------------------------------------------
    3. RESET & AMBIENT AIRY SKY BACKGROUND
    -------------------------------------------------------------------------- */
 *,
@@ -197,4 +227,51 @@ p {
   line-height: 1.55;
   color: var(--color-gray-dark);
   font-weight: 400;
+}
+/*BUTTONS & INTERACTIVE PILLS*/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.825rem 1.85rem;
+  font-family: var(--font-primary);
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all var(--transition-smooth);
+}
+
+.btn-primary {
+  background-color: var(--color-apple-blue);
+  color: var(--color-white);
+  border-color: var(--color-apple-blue);
+  box-shadow: 0 4px 16px rgba(0, 113, 227, 0.28);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-blue-dark);
+  border-color: var(--color-blue-dark);
+  color: var(--color-white);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 113, 227, 0.35);
+}
+
+.btn-secondary {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--color-dark);
+  border: 1px solid var(--color-sky-border);
+  backdrop-filter: blur(10px);
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-white);
+  border-color: var(--color-apple-blue);
+  color: var(--color-apple-blue);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-subtle);
 }
