@@ -297,3 +297,36 @@ p {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-floating);
 }
+/* --------------------------------------------------------------------------
+   5. FLUID CONTAINER & AUTO-SCALING LAYOUT
+   -------------------------------------------------------------------------- */
+.container {
+  width: min(100% - 2.5rem, 1180px);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.section-padding {
+  padding-top: var(--space-hero);
+  padding-bottom: var(--space-hero);
+}
+
+.section-title-wrap {
+  text-align: center;
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: var(--space-xl);
+}
+
+.grid-3col {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-lg);
+}
+
+.clearfix::after {
+  content: "";
+  display: table;
+  clear: both;
+}
