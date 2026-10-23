@@ -297,3 +297,56 @@ p {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-floating);
 }
+
+.job-card {
+  background-color: var(--glass-bg-card);
+  backdrop-filter: var(--glass-blur);
+  -webkit-backdrop-filter: var(--glass-blur);
+  border: 1px solid rgba(255, 255, 255, 0.95);
+  outline: 1px solid var(--color-sky-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-xl);
+  margin-bottom: var(--space-xl);
+  box-shadow: var(--shadow-floating);
+  transition: var(--transition-elevate);
+}
+
+.job-card:hover {
+  box-shadow: var(--shadow-elevated);
+  outline-color: var(--color-apple-blue);
+}
+
+.job-header {
+  border-bottom: 1px solid var(--color-sky-border);
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+  .job-meta-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xs);
+  margin-top: var(--space-xs);
+  margin-bottom: var(--space-xs);
+}
+
+.meta-pill {
+  font-size: 0.775rem;
+  font-weight: 600;
+  padding: 0.25rem 0.75rem;
+  background-color: var(--color-sky-tint);
+  border: 1px solid var(--color-sky-border);
+  border-radius: var(--radius-full);
+  color: var(--color-apple-blue);
+}
+
+.job-salary-block {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--color-apple-blue);
+  margin-top: var(--space-xs);
+}
+
+.job-content-section {
+  margin-bottom: var(--space-lg);
+}
