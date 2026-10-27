@@ -19,6 +19,7 @@
   <link rel="stylesheet" href="./styles.css">
   <link rel="icon" type="image/png" href="./images/NexEdu-Favicon.png?v=2">
 
+  <!-- Embedded CSS Requirement: Page-specific hint text styling -->
   <style>
     .hint {
       font-size: 12px;
@@ -34,6 +35,7 @@
   <!-- Skip link for keyboard accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
+  <!-- 1. SHARED HEADER & NAVIGATION -->
   <header>
     <nav>
       <a href="index.html" class="brand">
@@ -49,7 +51,8 @@
       </ul>
     </nav>
   </header>
-  <!--1. MAIN CONTENT AREA (APPLICATION FORM) -->
+
+  <!-- 2. MAIN CONTENT AREA (APPLICATION FORM) -->
   <main id="main-content" class="container">
 
     <div class="section-header">
@@ -63,15 +66,14 @@
     <!-- Swinburne Mercury Endpoint -->
     <form method="post" action="https://mercury.swin.edu.au/it000000/formtest.php" class="card">
 
-        <!-- Swinburne Mercury Endpoint -->
-        <form method="post" action="https://mercury.swin.edu.au/it000000/formtest.php" class="application-form">
-
-          <fieldset>
-            <legend>1. Position Requisition Details</legend>
-              <div class="form-group">
-                <label for="job_ref">
-                  Job Reference Number *<span class="hint">Exactly 5 alphanumeric characters and the first 2 letters must be uppercase (e.g. ED101, UX204)</span>
-                </label>
+      <!-- FIELDSET 1: POSITION DETAILS -->
+      <fieldset>
+        <legend>1. Position Requisition Details</legend>
+        <div class="form-group">
+          <label for="job_ref">
+            Job Reference Number *
+            <span class="hint">Exactly 5 alphanumeric characters and the first 2 letters must be uppercase (e.g. ED101, UX204)</span>
+          </label>
           <input
             type="text"
             id="job_ref"
@@ -184,7 +186,8 @@
           </div>
         </div>
       </fieldset>
-          <!-- FIELDSET 3: RESIDENTIAL ADDRESS -->
+
+      <!-- FIELDSET 3: RESIDENTIAL ADDRESS -->
       <fieldset>
         <legend>3. Residential Address</legend>
 
@@ -358,5 +361,3 @@
 </body>
 
 </html>
-<!-- The Apply html now is all prepared with class and id.
-The CSS will help the page look better. -->
