@@ -198,41 +198,7 @@ header nav ul a.active {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-floating);
 }
-/* change soon */
 
-/* --------------------------------------------------------------------------
-   5. FLUID CONTAINER & AUTO-SCALING LAYOUT
-   -------------------------------------------------------------------------- */
-.container {
-  width: min(100% - 2.5rem, 1180px);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.section-padding {
-  padding-top: var(--space-hero);
-  padding-bottom: var(--space-hero);
-}
-
-.section-title-wrap {
-  text-align: center;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: var(--space-xl);
-}
-
-.grid-3col {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-}
-
-.clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
 /* ==========================================================================
    4. LAYOUT CONTAINERS, CARDS, BUTTONS & BADGES
@@ -414,6 +380,72 @@ input[type="checkbox"] {
   height: 16px;
   vertical-align: middle;
   margin-right: 4px;
+}
+
+/* ==========================================================================
+   9. ABOUT TEAM PAGE (about.html)
+   Rubric Requirement: Bordered figure, nested list & definition list
+   ========================================================================== */
+.nested-list {
+  padding-left: 24px;
+}
+
+/* Child combinator (>) for top-level nested list items */
+.nested-list > li {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.nested-list ul {
+  padding-left: 24px;
+  font-weight: normal;
+  list-style-type: circle;
+}
+
+/* Rubric Requirement: Bordered <figure> for group photo */
+figure {
+  margin: 20px auto 28px auto;
+  max-width: 840px;
+  background-color: #ffffff;
+  border: 3px solid #0071e3;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+figure img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+figcaption {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #f0f9ff;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Definition List (<dl>, <dt>, <dd>) */
+dt {
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+dd {
+  margin-bottom: 10px;
+}
+
+blockquote {
+  background-color: #f0f9ff;
+  border-left: 4px solid #0071e3;
+  padding: 10px 14px;
+  font-style: italic;
 }
 
 /* ==========================================================================

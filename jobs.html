@@ -1,86 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Explore job opportunities at NexEdu Technologies. We are hiring a Learning Platform Engineer (ED101) and UX Designer (UX204).">
-    <meta name="keywords" content="NexEdu Careers, EdTech Jobs, Software Engineer Can Tho, UX Designer Vietnam">
-    <meta name="author" content="NexEdu Team">
-    <title> Careers &amp; Open Position | NexEdu Technologies </title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Explore job opportunities at NexEdu Technologies. We are hiring a Learning Platform Engineer (ED101) and UX Designer (UX204).">
+  <meta name="keywords" content="NexEdu Careers, EdTech Jobs, Software Engineer Can Tho, UX Designer Vietnam">
+  <meta name="author" content="Ho Kim Hoan Nguyen (ID: 106638366) - NexEdu Team">
+  <title>Careers &amp; Open Positions | NexEdu Technologies</title>
 
-    <link rel="stylesheet" href="styles.css">
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" href="./images/NexEdu-Favicon.png">
+  <!--
+    COS10026 Academic Integrity - Generative AI Usage Acknowledgment
+    Tool: Microsoft Copilot / OpenAI ChatGPT
+    Prompt: "Generate realistic job descriptions for an EdTech company (Software Engineer and Accessibility UX Designer) with salary, responsibilities, and requirements suitable for semantic HTML5."
+    Modifications: Evaluated, simplified, and manually edited by Ho Kim Hoan Nguyen (106638366) for COS10026 Part 1 specifications.
+  -->
 
-<!--  REQUIREMENT: Exactly ONE Embedded Style Block Scoped Purpose: Scoped priority badge and intro border accent specific to jobs.html. -->
-    <style>
-    .priority-badge {display: inline-block;
-      background-color: #0071e3;
-      color: #ffffff;
-      font-size: 0.75rem;
-      font-weight: 700;
-      padding: 0.2rem 0.6rem;
-      border-radius: 9999px;
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="icon" type="image/png" href="./images/NexEdu-Favicon.png?v=2">
+
+  <!-- Embedded CSS Requirement: Page-specific salary text styling -->
+  <style>
+    .salary {
+      font-weight: bold;
+      color: #0071e3;
+      margin-top: 6px;
     }
-    .jobs-intro-bar {
-      border-left: 3px solid #0071e3;
-      padding-left: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    </style>
+  </style>
 </head>
+
 <body>
-    
-    <!-- Accessible Skip Link -->
+
+  <!-- Skip link for keyboard accessibility -->
   <a href="#main-content" class="skip-link">Skip to main content</a>
 
-  <!-- 1. SHARED FLOATING HEADER & NAVIGATION -->
+  <!--SHARED HEADER & NAVIGATION-->
+  <header>
+    <nav>
+      <a href="index.html" class="brand">
+        <img src="images/NexEdu-Logo-cut.png" alt="NexEdu logo" width="38" height="38">
+        NexEdu <span>Technologies</span>
+      </a>
 
-  <header class="site-header">
-    <nav class="site-nav" aria-labelledby="Main Navigation">
-        <a href="index.html" class="brand-lockup">
-            <img src="images/NexEdu-Logo-cut.png" alt="NexEdu Technologies Logo" class="brand-logo" width="38" height="38">
-            <div class="brand-text">
-                <span class="brand-name">NexEdu</span>
-                <span class="brand-tagline">Technologies</span>
-            </div>
-        </a>
-        
-        <ul class="nav-links">
-            <li><a href="index.html" class="nav-link"> Home</a></li>
-            <li><a href="jobs.html" class="nav-link active"> Careers</a></li>
-            <li><a href="apply.html" class="nav-link"> Apply Now</a></li>
-            <li><a href="about.html" class="nav-link"> About Team</a></li>
-        </ul>
-    </div>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="jobs.html" class="active">Careers</a></li>
+        <li><a href="apply.html">Apply Now</a></li>
+        <li><a href="about.html">About Team</a></li>
+      </ul>
+    </nav>
   </header>
 
-<!-- 2. MAIN CONTENT AREA (WITH FLOATED ASIDE ELEMENT)-->
+  <!--MAIN CONTENT AREA (WITH FLOATED ASIDE ELEMENT)-->
+  <main id="main-content" class="container">
 
-  <main id="main-content" class="page-wrapper">
     <!-- Careers Header Banner -->
-     <section class="section-padding"
-     aria-labelledby="careers-heading">
-        <div class="container">
-            <h1 id="careers-heading" class="hero-title">Careers at NexEdu Technologies</h1>
-            <div class="jobs-intro-bar">
-                <p class="text-lead text-muted">Join our team of developers and designers building accessible educational platforms. We offer competitive salaries, flexible hybrid work, and continuous learning opportunities.
-                </p>
-            </div>
-        
-        </div>
+    <section>
+      <h1>Careers at NexEdu Technologies</h1>
+      <p>
+        Join our team of developers and designers building accessible educational platforms. We offer competitive salaries, flexible hybrid work, and continuous learning opportunities.
+      </p>
     </section>
 
     <!-- Layout Container with Floated Aside & Clearfix -->
-     <div class="container">
-      <div class="jobs-layout clearfix">
+    <div class="clearfix">
 
-        <!--  RUBRIC REQUIREMENT: Floated Aside Sidebar
-             float: right; width: 28%; margin-left: 2.5rem; margin-bottom: 2rem;
-             border: 1px solid #bae6fd; padding: 1.5rem; background: glass; -->
-
-<aside>
+      <!-- RUBRIC REQUIREMENT: <aside> floated right, 25% width, margin, padding, border -->
+      <aside>
         <h3 id="sidebar-title">Hiring Process &amp; Info</h3>
 
         <h4>Recruitment Process</h4>
@@ -109,7 +95,7 @@
         </p>
       </aside>
 
-         <!-- Job Listings (Multiple <section> elements as required by Rubric) -->
+      <!-- Job Listings (Multiple <section> elements) -->
       <section class="jobs-main">
         <h2>Current Open Positions</h2>
 
@@ -131,7 +117,7 @@
             </p>
           </section>
 
-          <!-- Mandatory Rubric Feature: Ordered List (<ol>) for Key Responsibilities -->
+          <!-- Ordered List (<ol>) for Key Responsibilities -->
           <section>
             <h4>Key Responsibilities</h4>
             <ol>
@@ -143,7 +129,7 @@
             </ol>
           </section>
 
-          <!-- Mandatory Rubric Feature: Unordered List (<ul>) for Requirements -->
+          <!-- Unordered List (<ul>) for Requirements -->
           <section>
             <h4>Candidate Requirements &amp; Qualifications</h4>
             <h5>Essential Requirements:</h5>
@@ -183,7 +169,7 @@
             </p>
           </section>
 
-          <!-- Mandatory Rubric Feature: Ordered List (<ol>) for Key Responsibilities -->
+          <!-- Ordered List (<ol>) for Key Responsibilities -->
           <section>
             <h4>Key Responsibilities</h4>
             <ol>
@@ -195,7 +181,7 @@
             </ol>
           </section>
 
-          <!-- Mandatory Rubric Feature: Unordered List (<ul>) for Requirements -->
+          <!-- Unordered List (<ul>) for Requirements -->
           <section>
             <h4>Candidate Requirements &amp; Qualifications</h4>
             <h5>Essential Requirements:</h5>
@@ -220,34 +206,30 @@
       </section>
     </div>
 
-       <!--REQUIREMENT: Exactly ONE Intentional Inline Style Demonstrating specific property cascade/override without style pollution.-->
-
-    <div class="glass-card" style="border-top: 4px solid #0071e3; margin-top: 2rem;">
-        <h4>Equal Opportunity Statement</h4>
-        <p>
-         NexEdu Technologies welcomes applications from all qualified candidates regardless of background. If you need any assistance during the interview process, feel free to reach out to us at <a href="mailto:careers@nexedu.edu.vn">careers@nexedu.edu.vn</a>.
-        </p>
-      </div> 
-      
+    <!-- Inline CSS: One intentional inline style -->
+    <div class="card" style="border-top: 4px solid #0071e3;">
+      <h4>Equal Opportunity Statement</h4>
+      <p>
+        NexEdu Technologies welcomes applications from all qualified candidates regardless of background. If you need any assistance during the interview process, feel free to reach out to us at <a href="mailto:careers@nexedu.edu.vn">careers@nexedu.edu.vn</a>.
+      </p>
     </div>
 
   </main>
 
-   <!-- 3. SITE FOOTER (SHARED ACROSS ALL PAGES) -->
-
-<footer class="site-footer">
+  <!--SITE FOOTER -->
+  <footer>
     <div class="container">
       <div class="footer-grid">
-        <div class="footer-col">
+        <div>
           <h4>NexEdu Technologies</h4>
           <p>
             Engineering the Future of Human Learning through resilient educational technologies, uncompromising accessibility standards, and ethical digital research.
           </p>
         </div>
 
-        <div class="footer-col">
+        <div>
           <h4>Navigation</h4>
-          <ul class="footer-links">
+          <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="jobs.html">Careers &amp; Open Roles</a></li>
             <li><a href="apply.html">Submit Application</a></li>
@@ -255,35 +237,33 @@
           </ul>
         </div>
 
-        <div class="footer-col">
+        <div>
           <h4>Academic &amp; Project</h4>
-          <ul class="footer-links">
-            <li><a href="https://jira.swinburne.edu.au/browse/COS10026-G04" target="_blank" rel="noopener noreferrer">Jira Project Board</a></li>
-            <li><a href="https://github.com/swinburne-cos10026/nexedu-recruitment-portal" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+          <ul>
+            <li><a href="https://nextgentechx.atlassian.net/jira/software/projects/NEX/summary" target="_blank" rel="noopener noreferrer">Jira Project Board</a></li>
+            <li><a href="https://github.com/vupaswin/NexEdu-Project" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
+            <li><a href="https://vupaswin.github.io/NexEdu-Project/" target="_blank" rel="noopener noreferrer">Live Site (GitHub Pages)</a></li>
             <li><a href="mailto:careers@nexedu.edu.vn">careers@nexedu.edu.vn</a></li>
           </ul>
         </div>
 
-        <div class="footer-col">
+        <div>
           <h4>Asia-Pacific &amp; Global Hubs</h4>
           <p>
             Can Tho Innovation Campus<br>
             Ninh Kieu District, Can Tho City, Vietnam<br>
-            Phone: +84 85 7399 914
+            Phone: +84 857 399 914
           </p>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div>
-          &copy; 2026 NexEdu Technologies Pty Ltd. All rights reserved.
-        </div>
-        <div>
-          COS10026 Web Technologies &bull; Part 1
-        </div>
+        <div>&copy; 2026 NexEdu Technologies Pty Ltd. All rights reserved.</div>
+        <div>COS10026 Web Technologies &bull; Part 1</div>
       </div>
     </div>
   </footer>
 
 </body>
+
 </html>
