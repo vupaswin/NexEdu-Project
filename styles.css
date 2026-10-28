@@ -176,29 +176,6 @@ header nav ul a.active {
 }
 
 
-/* change soon */
-/* --------------------------------------------------------------------------
-  CAREERS & JOB SPECIFICATIONS (jobs.html)
-   Rubric Mandatory Requirement: Floated Aside with Clearfix
-   -------------------------------------------------------------------------- */
-.jobs-layout {
-  display: block;
-  margin-top: var(--space-xl);
-}
-
-/* MANDATORY RUBRIC: Float Right Aside Element */
-.sidebar-aside {
-  float: right;
-  width: 28%;
-  margin-left: 2.5rem;
-  margin-bottom: 2rem;
-  padding: var(--space-lg);
-  background-color: var(--glass-bg-card);
-  border: 1px solid var(--color-sky-border);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-floating);
-}
-
 
 /* ==========================================================================
    4. LAYOUT CONTAINERS, CARDS, BUTTONS & BADGES
@@ -297,6 +274,50 @@ header nav ul a.active {
 .student-id {
   font-family: "Courier New", monospace;
   border-color: #0071e3;
+}
+
+/* ==========================================================================
+   7. JOBS PAGE & FLOATED ASIDE (jobs.html)
+   Rubric Requirement: <aside> floated right, 25% width, margin, padding, border
+   ========================================================================== */
+aside {
+  float: right;
+  width: 25%;
+  margin-left: 24px;
+  margin-bottom: 24px;
+  padding: 20px;
+  background-color: #f0f9ff;
+  border: 2px solid #0071e3;
+  border-radius: 10px;
+}
+
+aside ul {
+  padding-left: 20px;
+  margin-bottom: 16px;
+}
+
+.jobs-main {
+  width: 70%;
+}
+
+article header {
+  border-bottom: 1px solid #bae6fd;
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+article ol,
+article ul {
+  padding-left: 24px;
+  margin-bottom: 16px;
+}
+
+article ul {
+  list-style-type: square;
+}
+
+article li {
+  margin-bottom: 6px;
 }
 
 /* ==========================================================================
