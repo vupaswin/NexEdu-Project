@@ -198,41 +198,6 @@ header nav ul a.active {
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-floating);
 }
-/* change soon */
-
-/* --------------------------------------------------------------------------
-   5. FLUID CONTAINER & AUTO-SCALING LAYOUT
-   -------------------------------------------------------------------------- */
-.container {
-  width: min(100% - 2.5rem, 1180px);
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.section-padding {
-  padding-top: var(--space-hero);
-  padding-bottom: var(--space-hero);
-}
-
-.section-title-wrap {
-  text-align: center;
-  max-width: 720px;
-  margin-left: auto;
-  margin-right: auto;
-  margin-bottom: var(--space-xl);
-}
-
-.grid-3col {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-lg);
-}
-
-.clearfix::after {
-  content: "";
-  display: table;
-  clear: both;
-}
 
 /* ==========================================================================
    4. LAYOUT CONTAINERS, CARDS, BUTTONS & BADGES
@@ -333,6 +298,76 @@ header nav ul a.active {
   border-color: #0071e3;
 }
 
+/* ==========================================================================
+   5. HOME PAGE: HERO BANNER & SEARCH BAR (index.html)
+   ========================================================================== */
+.hero {
+  text-align: center;
+  padding: 32px 0 20px 0;
+  border-bottom: 1px solid #bae6fd;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #475569;
+  max-width: 680px;
+  margin: 0 auto 20px auto;
+}
+
+.hero img {
+  width: 100%;
+  max-width: 1060px;
+  height: 360px;
+  object-fit: cover;
+  margin: 24px auto 0 auto;
+  border-radius: 10px;
+  border: 2px solid #bae6fd;
+}
+
+/* ==========================================================================
+   6. TABLES (index.html & about.html)
+   Rubric Requirement: Styled table with hex colours and hover effects
+   ========================================================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+caption {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 16px;
+  background-color: #e0f2fe;
+  color: #0f172a;
+  border: 1px solid #bae6fd;
+  border-bottom: none;
+  text-align: left;
+}
+
+th, td {
+  padding: 12px 16px;
+  border: 1px solid #bae6fd;
+  text-align: left;
+}
+
+thead th,
+tfoot {
+  background-color: #f0f9ff;
+  color: #0071e3;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+/* Rubric Requirement: Table row hover effect with Hex colour */
+tbody tr:hover {
+  background-color: #e0f2fe;
+}
 /* ==========================================================================
    10. FOOTER & RESPONSIVE MEDIA QUERY (Week 5 Lecture)
    ========================================================================== */
