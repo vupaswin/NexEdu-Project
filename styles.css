@@ -277,6 +277,226 @@ header nav ul a.active {
 }
 
 /* ==========================================================================
+   5. HOME PAGE: HERO BANNER & SEARCH BAR (index.html)
+   ========================================================================== */
+.hero {
+  text-align: center;
+  padding: 32px 0 20px 0;
+  border-bottom: 1px solid #bae6fd;
+}
+
+.hero p {
+  font-size: 18px;
+  color: #475569;
+  max-width: 680px;
+  margin: 0 auto 20px auto;
+}
+
+.hero img {
+  width: 100%;
+  max-width: 1060px;
+  height: 360px;
+  object-fit: cover;
+  margin: 24px auto 0 auto;
+  border-radius: 10px;
+  border: 2px solid #bae6fd;
+}
+
+/* ==========================================================================
+   6. TABLES (index.html & about.html)
+   Rubric Requirement: Styled table with hex colours and hover effects
+   ========================================================================== */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #ffffff;
+  margin-bottom: 24px;
+  font-size: 15px;
+}
+
+caption {
+  font-size: 16px;
+  font-weight: bold;
+  padding: 12px 16px;
+  background-color: #e0f2fe;
+  color: #0f172a;
+  border: 1px solid #bae6fd;
+  border-bottom: none;
+  text-align: left;
+}
+
+th, td {
+  padding: 12px 16px;
+  border: 1px solid #bae6fd;
+  text-align: left;
+}
+
+thead th,
+tfoot {
+  background-color: #f0f9ff;
+  color: #0071e3;
+  font-weight: bold;
+}
+
+tbody tr:nth-child(even) {
+  background-color: #f8fafc;
+}
+
+/* Rubric Requirement: Table row hover effect with Hex colour */
+tbody tr:hover {
+  background-color: #e0f2fe;
+}
+
+/* ==========================================================================
+   8. APPLICATION FORM & SEARCH INPUTS (apply.html & index.html)
+   Rubric Requirement: Form layout using Flexbox
+   ========================================================================== */
+fieldset {
+  border: 1px solid #bae6fd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background-color: #f8fafc;
+}
+
+legend {
+  font-size: 18px;
+  font-weight: bold;
+  color: #0071e3;
+  padding: 0 8px;
+}
+
+/* Flexbox row for 2-column, 3-column, and search bar inputs */
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  align-items: flex-end;
+}
+
+.form-group {
+  flex: 1 1 200px;
+  margin-bottom: 14px;
+}
+
+label {
+  display: block;
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 6px;
+}
+
+/* Attribute Selectors for text, date, email, tel, search, select, and textarea */
+input[type="text"],
+input[type="date"],
+input[type="email"],
+input[type="tel"],
+input[type="search"],
+select,
+textarea {
+  width: 100%;
+  padding: 10px 12px;
+  font-family: Calibri, Arial, sans-serif;
+  font-size: 15px;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  background-color: #ffffff;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #0071e3;
+  outline: 2px solid #bae6fd;
+}
+
+/* Inline label for radio buttons and checkboxes */
+.choice-label {
+  display: inline-block;
+  font-weight: normal;
+  padding: 6px 12px;
+  margin-right: 8px;
+  border: 1px solid #bae6fd;
+  border-radius: 6px;
+  background-color: #ffffff;
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+  margin-right: 4px;
+}
+
+/* ==========================================================================
+   9. ABOUT TEAM PAGE (about.html)
+   Rubric Requirement: Bordered figure, nested list & definition list
+   ========================================================================== */
+.nested-list {
+  padding-left: 24px;
+}
+
+/* Child combinator (>) for top-level nested list items */
+.nested-list > li {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.nested-list ul {
+  padding-left: 24px;
+  font-weight: normal;
+  list-style-type: circle;
+}
+
+/* Rubric Requirement: Bordered <figure> for group photo */
+figure {
+  margin: 20px auto 28px auto;
+  max-width: 840px;
+  background-color: #ffffff;
+  border: 3px solid #0071e3;
+  border-radius: 10px;
+  padding: 8px;
+}
+
+figure img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+
+figcaption {
+  padding: 10px;
+  font-size: 14px;
+  background-color: #f0f9ff;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* Definition List (<dl>, <dt>, <dd>) */
+dt {
+  font-size: 20px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+dd {
+  margin-bottom: 10px;
+}
+
+blockquote {
+  background-color: #f0f9ff;
+  border-left: 4px solid #0071e3;
+  padding: 10px 14px;
+  font-style: italic;
+}
+
+/* ==========================================================================
    10. FOOTER & RESPONSIVE MEDIA QUERY (Week 5 Lecture)
    ========================================================================== */
 footer {
