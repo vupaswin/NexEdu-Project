@@ -277,50 +277,6 @@ header nav ul a.active {
 }
 
 /* ==========================================================================
-   7. JOBS PAGE & FLOATED ASIDE (jobs.html)
-   Rubric Requirement: <aside> floated right, 25% width, margin, padding, border
-   ========================================================================== */
-aside {
-  float: right;
-  width: 25%;
-  margin-left: 24px;
-  margin-bottom: 24px;
-  padding: 20px;
-  background-color: #f0f9ff;
-  border: 2px solid #0071e3;
-  border-radius: 10px;
-}
-
-aside ul {
-  padding-left: 20px;
-  margin-bottom: 16px;
-}
-
-.jobs-main {
-  width: 70%;
-}
-
-article header {
-  border-bottom: 1px solid #bae6fd;
-  padding-bottom: 12px;
-  margin-bottom: 16px;
-}
-
-article ol,
-article ul {
-  padding-left: 24px;
-  margin-bottom: 16px;
-}
-
-article ul {
-  list-style-type: square;
-}
-
-article li {
-  margin-bottom: 6px;
-}
-
-/* ==========================================================================
    10. FOOTER & RESPONSIVE MEDIA QUERY (Week 5 Lecture)
    ========================================================================== */
 footer {
