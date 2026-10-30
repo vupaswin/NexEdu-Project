@@ -2,7 +2,7 @@
   filename: styles.css
   author: Group 04 - NexEdu Innovators (Anh Vu Pham, Ho Kim Hoan Nguyen, Nguyen Cao Minh Tat, Anh Quan Nguyen)
   created: 16/10/2026
-  last modified: 27/10/2026
+  last modified: 30/10/2026
   description: External stylesheet for NexEdu Technologies recruitment website (COS10026 Part 1).
 
   COS10026 Academic Integrity - Generative AI Usage Acknowledgment
@@ -40,12 +40,12 @@ img {
 }
 
 a {
-  color: #0071e3;
+  color: #004b99;
   text-decoration: none;
 }
 
 a:hover {
-  color: #005bb5;
+  color: #003366;
   text-decoration: underline;
 }
 
@@ -54,7 +54,7 @@ a:hover {
   position: absolute;
   top: -100px;
   left: 20px;
-  background-color: #0071e3;
+  background-color: #004b99;
   color: #ffffff;
   padding: 8px 16px;
   font-weight: bold;
@@ -102,7 +102,7 @@ p {
 #sidebar-title,
 #role-ed101-title,
 #role-ux204-title {
-  color: #0071e3;
+  color: #004b99;
 }
 
 /* ==========================================================================
@@ -146,7 +146,7 @@ header nav {
 .brand span {
   font-family: Arial, sans-serif;
   font-size: 12px;
-  color: #0071e3;
+  color: #004b99;
   text-transform: uppercase;
 }
 
@@ -166,12 +166,12 @@ header nav ul a {
 
 header nav ul a:hover {
   background-color: #e0f2fe;
-  color: #0071e3;
+  color: #004b99;
   text-decoration: none;
 }
 
 header nav ul a.active {
-  background-color: #0071e3;
+  background-color: #004b99;
   color: #ffffff;
 }
 
@@ -203,7 +203,7 @@ header nav ul a.active {
 }
 
 .card:hover {
-  border-color: #0071e3;
+  border-color: #004b99;
 }
 
 /* 3-column Flexbox layout for culture cards on index.html */
@@ -231,16 +231,16 @@ header nav ul a.active {
   padding: 10px 22px;
   font-size: 15px;
   font-weight: bold;
-  background-color: #0071e3;
+  background-color: #004b99;
   color: #ffffff;
-  border: 2px solid #0071e3;
+  border: 2px solid #004b99;
   border-radius: 6px;
   cursor: pointer;
 }
 
 .btn:hover {
-  background-color: #005bb5;
-  border-color: #005bb5;
+  background-color: #003366;
+  border-color: #003366;
   color: #ffffff;
   text-decoration: none;
 }
@@ -253,8 +253,8 @@ header nav ul a.active {
 
 .btn-outline:hover {
   background-color: #f0f9ff;
-  border-color: #0071e3;
-  color: #0071e3;
+  border-color: #004b99;
+  color: #004b99;
 }
 
 /* Small Tag Badge & Styled Student ID (about.html Rubric Requirement) */
@@ -263,7 +263,7 @@ header nav ul a.active {
   display: inline-block;
   padding: 4px 12px;
   background-color: #e0f2fe;
-  color: #0071e3;
+  color: #004b99;
   border: 1px solid #bae6fd;
   border-radius: 14px;
   font-size: 13px;
@@ -273,7 +273,7 @@ header nav ul a.active {
 
 .student-id {
   font-family: "Courier New", monospace;
-  border-color: #0071e3;
+  border-color: #004b99;
 }
 
 /* ==========================================================================
@@ -287,7 +287,7 @@ header nav ul a.active {
 
 .hero p {
   font-size: 18px;
-  color: #475569;
+  color: #334155;
   max-width: 680px;
   margin: 0 auto 20px auto;
 }
@@ -334,7 +334,7 @@ th, td {
 thead th,
 tfoot {
   background-color: #f0f9ff;
-  color: #0071e3;
+  color: #004b99;
   font-weight: bold;
 }
 
@@ -358,7 +358,7 @@ aside {
   margin-bottom: 24px;
   padding: 20px;
   background-color: #f0f9ff;
-  border: 2px solid #0071e3;
+  border: 2px solid #004b99;
   border-radius: 10px;
 }
 
@@ -407,7 +407,7 @@ fieldset {
 legend {
   font-size: 18px;
   font-weight: bold;
-  color: #0071e3;
+  color: #004b99;
   padding: 0 8px;
 }
 
@@ -451,7 +451,7 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  border-color: #0071e3;
+  border-color: #004b99;
   outline: 2px solid #bae6fd;
 }
 
@@ -500,7 +500,7 @@ figure {
   margin: 20px auto 28px auto;
   max-width: 840px;
   background-color: #ffffff;
-  border: 3px solid #0071e3;
+  border: 3px solid #004b99;
   border-radius: 10px;
   padding: 8px;
 }
@@ -536,9 +536,19 @@ dd {
 
 blockquote {
   background-color: #f0f9ff;
-  border-left: 4px solid #0071e3;
+  border-left: 4px solid #004b99;
   padding: 10px 14px;
   font-style: italic;
+}
+
+/* Specificity enhancements for page-specific classes to guarantee WCAG AAA contrast */
+p.salary,
+dd.role {
+  color: #004b99;
+}
+
+label .hint {
+  color: #475569;
 }
 
 /* ==========================================================================
@@ -550,6 +560,14 @@ footer {
   padding: 32px 0 20px 0;
   margin-top: 32px;
   font-size: 14px;
+}
+
+footer a {
+  color: #004b99;
+}
+
+footer a:hover {
+  color: #003366;
 }
 
 .footer-grid {
