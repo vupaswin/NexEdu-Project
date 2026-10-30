@@ -160,7 +160,7 @@
               type="tel"
               id="phone"
               name="phone"
-              pattern="[\d\s]{8,12}"
+              pattern="(0[0-9]{8-12}|\+[0-9]{1-2}[0-9]{8-12})"
               title="8 to 12 digits or spaces"
               placeholder="0412 345 678"
               required
@@ -306,7 +306,7 @@
 
     <!-- Inline CSS Requirement: One intentional inline style on apply.html -->
     <div class="card" style="border-left: 4px solid #0071e3;">
-      <h4>Secure Application Transmission</h4>
+      <h2>Secure Application Transmission</h2>
       <p>
         Form data submitted through this portal is transmitted securely via HTTP POST directly to the verification endpoint (<code>https://mercury.swin.edu.au/it000000/formtest.php</code>) in accordance with recruitment intake guidelines.
       </p>
