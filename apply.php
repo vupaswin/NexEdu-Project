@@ -1,0 +1,288 @@
+<?php include 'header.php'; ?>
+
+<main>
+
+  <!-- Skip link for keyboard accessibility -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
+  <!-- 1. SHARED HEADER & NAVIGATION -->
+  <header>
+    <nav>
+      <a href="index.html" class="brand">
+        <img src="images/NexEdu-Logo-cut.png" alt="NexEdu logo" width="38" height="38">
+        NexEdu <span>Technologies</span>
+      </a>
+
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="jobs.html">Careers</a></li>
+        <li><a href="apply.html" class="active">Apply Now</a></li>
+        <li><a href="about.html">About Team</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- 2. MAIN CONTENT AREA (APPLICATION FORM) -->
+  <main id="main-content" class="container">
+
+    <div class="section-header">
+      <span class="badge">Online Recruitment Intake</span>
+      <h1>Candidate Application Form</h1>
+      <p>
+        Complete the following verified submission form to register your candidacy. All fields are mandatory except where explicitly indicated as optional.
+      </p>
+    </div>
+
+    <!-- Swinburne Mercury Endpoint -->
+    <form method="post" action="https://mercury.swin.edu.au/it000000/formtest.php" class="card" novalidate>
+
+      <!-- FIELDSET 1: POSITION DETAILS -->
+      <fieldset>
+        <legend>1. Position Requisition Details</legend>
+        <div class="form-group">
+          <label for="job_ref">
+            Job Reference Number *
+            <span class="hint">Exactly 5 alphanumeric characters and the first 2 letters must be uppercase (e.g. ED101, UX204)</span>
+          </label>
+          <input
+            type="text"
+            id="job_ref"
+            name="job_ref"
+            pattern="[A-Z]{2}\d{3}"
+            title="2 uppercase letters followed by 3 digits (e.g. ED101 or UX204)"
+            maxlength="5"
+            placeholder="e.g. ED101"
+            required
+          >
+        </div>
+      </fieldset>
+
+      <!-- FIELDSET 2: PERSONAL IDENTITY & CONTACT -->
+      <fieldset>
+        <legend>2. Personal Identity &amp; Demographics</legend>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="first_name">
+              First Name * <span class="hint">(Max 20 alpha characters)</span>
+            </label>
+            <input
+              type="text"
+              id="first_name"
+              name="first_name"
+              maxlength="20"
+              pattern="[a-zA-ZÀ-ÖØ-öø-ÿĀ-ỹ\s]+"
+              title="Alphabet characters only (up to 20 characters)"
+              placeholder="e.g. Alexander"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="last_name">
+              Last Name * <span class="hint">(Max 20 alpha characters)</span>
+            </label>
+            <input
+              type="text"
+              id="last_name"
+              name="last_name"
+              maxlength="20"
+              pattern="[a-zA-ZÀ-ÖØ-öø-ÿĀ-ỹ\s]+"
+              title="Alphabet characters only (up to 20 characters)"
+              placeholder="e.g. Mercer"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="dob">
+              Date of Birth * <span class="hint">(dd/mm/yyyy)</span>
+            </label>
+            <input
+            type="date" 
+            id="dob" 
+            name="dob" 
+            required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">
+              Email Address * <span class="hint">(Standard email format)</span>
+            </label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="alexander.mercer@example.com"
+              required
+            >
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="phone">
+              Contact Phone Number * <span class="hint">(8 to 12 digits or spaces)</span>
+            </label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              pattern="(0[0-9]{8-12}|\+[0-9]{1-2}[0-9]{8-12})"
+              title="8 to 12 digits or spaces"
+              placeholder="0412 345 678"
+              required
+            >
+          </div>
+
+          <!-- Gender Radio Button Sub-Fieldset -->
+          <div class="form-group">
+            <fieldset>
+              <legend>Gender Identity *</legend>
+              <label class="choice-label" for="gender_male">
+                <input type="radio" id="gender_male" name="gender" value="Male" required> Male
+              </label>
+
+              <label class="choice-label" for="gender_female">
+                <input type="radio" id="gender_female" name="gender" value="Female" required> Female
+              </label>
+
+              <label class="choice-label" for="non_binary">
+                <input type="radio" id="non_binary" name="gender" value="non-binary" required> Non-binary
+              </label>
+
+              <label class="choice-label" for="gender_other">
+                <input type="radio" id="gender_other" name="gender" value="Prefer not to say" required> Prefer not to say
+              </label>
+            </fieldset>
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- FIELDSET 3: RESIDENTIAL ADDRESS -->
+      <fieldset>
+        <legend>3. Residential Address</legend>
+
+        <div class="form-group">
+          <label for="address">
+            Street Address * <span class="hint">(Maximum 40 characters)</span>
+          </label>
+          <input
+            type="text"
+            id="address"
+            name="address"
+            maxlength="40"
+            placeholder="e.g. 42 Innovation Way, Apartment 3B"
+            required
+          >
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="suburb">
+              Suburb / Town * <span class="hint">(Maximum 40 characters)</span>
+            </label>
+            <input
+              type="text"
+              id="suburb"
+              name="suburb"
+              maxlength="40"
+              placeholder="e.g. Hawthorn"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="state">
+              State / Territory * <span class="hint">(Australian jurisdiction)</span>
+            </label>
+            <select id="state" name="state" required>
+              <option value="" disabled selected>Select State...</option>
+              <option value="VIC">VIC - Victoria</option>
+              <option value="NSW">NSW - New South Wales</option>
+              <option value="QLD">QLD - Queensland</option>
+              <option value="NT">NT - Northern Territory</option>
+              <option value="WA">WA - Western Australia</option>
+              <option value="SA">SA - South Australia</option>
+              <option value="TAS">TAS - Tasmania</option>
+              <option value="ACT">ACT - Australian Capital Territory</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="postcode">
+              Postcode * <span class="hint">(Exactly 4 digits)</span>
+            </label>
+            <input
+              type="text"
+              id="postcode"
+              name="postcode"
+              pattern="\d{4}"
+              title="Postcode must be exactly 4 digits"
+              maxlength="4"
+              placeholder="3122"
+              required
+            >
+          </div>
+        </div>
+      </fieldset>
+
+      <!-- FIELDSET 4: TECHNICAL SKILLS & PROFICIENCIES -->
+      <fieldset>
+        <legend>4. Technical Competencies &amp; Experience</legend>
+
+        <div class="form-group">
+          <p><strong>Core Competency Checkbox Group *</strong> <span class="hint">(Select all that apply)</span></p>
+          <label class="choice-label" for="skill_html5">
+            <input type="checkbox" id="skill_html5" name="skills[]" value="HTML5" checked required> HTML5 Semantic Architecture
+          </label>
+
+          <label class="choice-label" for="skill_css3">
+            <input type="checkbox" id="skill_css3" name="skills[]" value="CSS3 Grid/Flexbox"> CSS3 Grid / Flexbox Layouts
+          </label>
+
+          <label class="choice-label" for="skill_wcag">
+            <input type="checkbox" id="skill_wcag" name="skills[]" value="Accessibility/WCAG"> Accessibility / WCAG 2.1 AA
+          </label>
+
+          <label class="choice-label" for="skill_uiux">
+            <input type="checkbox" id="skill_uiux" name="skills[]" value="UI/UX Research"> UI/UX Pedagogical Research
+          </label>
+        </div>
+
+        <!-- The ONLY Optional Field as Mandated by Specifications -->
+        <div class="form-group">
+          <label for="other_skills">
+            Other Relevant Skills, Tooling &amp; Certifications <span class="hint">(Optional)</span>
+          </label>
+          <textarea
+            id="other_skills"
+            name="other_skills"
+            rows="4"
+            placeholder="Detail additional competencies (e.g. Golang, Kubernetes, Docker, Figma design systems, CPACC accessibility certification)..."
+          ></textarea>
+        </div>
+      </fieldset>
+
+      <!-- Form Actions & Submission Buttons -->
+      <div>
+        <button type="submit" class="btn">Submit Application</button>
+        <button type="reset" class="btn btn-outline">Reset Form</button>
+      </div>
+
+    </form>
+
+    <!-- Inline CSS Requirement: One intentional inline style on apply.html -->
+    <div class="card" style="border-left: 4px solid #0071e3;">
+      <h2>Secure Application Transmission</h2>
+      <p>
+        Form data submitted through this portal is transmitted securely via HTTP POST directly to the verification endpoint (<code>https://mercury.swin.edu.au/it000000/formtest.php</code>) in accordance with recruitment intake guidelines.
+      </p>
+    </div>
+
+  </main>
+
+  <!-- 3. SITE FOOTER (SHARED ACROSS ALL PAGES) -->
+<?php include 'footer.php'; ?>
