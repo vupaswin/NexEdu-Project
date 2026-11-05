@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include 'modules/header.php'; ?>
 
 <main>
 
@@ -285,4 +285,4 @@
   </main>
 
   <!-- 3. SITE FOOTER (SHARED ACROSS ALL PAGES) -->
-<?php include 'footer.php'; ?>
+<?php include 'modules/footer.php'; ?>
