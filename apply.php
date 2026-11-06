@@ -14,7 +14,7 @@
     </div>
 
     <!-- Swinburne Mercury Endpoint -->
-    <form method="post" action="https://mercury.swin.edu.au/it000000/formtest.php" class="card" novalidate>
+    <form method="post" action="/process_eoi.php" class="card" novalidate>
 
       <!-- FIELDSET 1: POSITION DETAILS -->
       <fieldset>
