@@ -1,4 +1,5 @@
-<?php include 'modules/header.php'; ?>
+<?php include ("modules/header.inc");?>
+<?php include ("modules/nav.inc");?>
 
 <main>
 
