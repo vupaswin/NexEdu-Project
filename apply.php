@@ -1,5 +1,5 @@
-<?php include 'modules/header.php'; ?>
-
+<?php include 'modules/header.inc'; ?>
+<?php include 'modules/nav.inc'; ?>
 <main>
 
   <!-- Skip link for keyboard accessibility -->
@@ -34,7 +34,7 @@
     </div>
 
     <!-- Swinburne Mercury Endpoint -->
-    <form method="post" action="https://mercury.swin.edu.au/it000000/formtest.php" class="card" novalidate>
+    <form method="post" action="/process_eoi.php" class="card" novalidate>
 
       <!-- FIELDSET 1: POSITION DETAILS -->
       <fieldset>
@@ -285,4 +285,4 @@
   </main>
 
   <!-- 3. SITE FOOTER (SHARED ACROSS ALL PAGES) -->
-<?php include 'modules/footer.php'; ?>
+<?php include 'modules/footer.inc'; ?>
