@@ -1,4 +1,5 @@
-<?php include 'modules/header.php'; ?>er>
+<?php include ("modules/header.inc");?>
+<?php include ("modules/nav.inc");?>
 
   <!--MAIN CONTENT AREA (WITH FLOATED ASIDE ELEMENT)-->
   <main id="main-content" class="container">
