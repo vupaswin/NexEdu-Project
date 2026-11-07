@@ -219,7 +219,11 @@ header nav ul a.active {
 }
 
 /* Clearfix for floated aside on jobs.html (Week 5 Float & Clear) */
-
+.clearfix::after {
+  content: "";
+  display: block;
+  clear: both;
+}
 
 /* Buttons */
 .btn {

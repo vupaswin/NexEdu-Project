@@ -1,54 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="NexEdu Technologies Careers Portal. Explore engineering, design, and accessibility opportunities in our Can Tho, Ho Chi Minh and remote teams.">
-  <meta name="keywords" content="NexEdu Technologies, Careers, Recruitment, Engineering, Design, Jobs Vietnam">
-  <meta name="author" content="Anh Vu Pham (ID: 106217835) - NexEdu Technologies Talent Team">
-  <title>NexEdu Technologies | Careers &amp; Engineering Opportunities</title>
-
-  <!--
-    COS10026 Academic Integrity - Generative AI Usage Acknowledgment
-    Tool: Microsoft Copilot / OpenAI ChatGPT
-    Prompt: "Suggest a table structure using rowspan and colspan for an EdTech company department overview, and simple CSS gradient ideas for a hero banner."
-    Modifications: Reviewed, simplified, and manually coded by Anh Vu Pham (106217835) to match COS10026 Week 1-5 lecture concepts and Part 1 rubric requirements.
-  -->
-
-  <link rel="stylesheet" href="./styles.css">
-  <link rel="icon" type="image/png" href="./images/NexEdu-Favicon.png?v=2">
-
-  <!-- Embedded CSS Requirement: Page-specific hero background gradient -->
-  <style>
-    .hero {
-      background-color: #e0f2fe;
-      background-image: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
-    }
-  </style>
-</head>
-
-<body>
-
-  <!-- Skip link for keyboard accessibility -->
-  <a href="#main-content" class="skip-link">Skip to main content</a>
-
-  <!-- 1. SHARED HEADER & NAVIGATION -->
-  <header>
-    <nav>
-      <a href="index.html" class="brand">
-        <img src="images/NexEdu-Logo-cut.png" alt="NexEdu logo" width="38" height="38">
-        NexEdu <span>Technologies</span>
-      </a>
-
-      <ul>
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="jobs.html">Careers</a></li>
-        <li><a href="apply.html">Apply Now</a></li>
-        <li><a href="about.html">About Team</a></li>
-      </ul>
-    </nav>
-  </header>
+<?php include ("modules/header.inc");?>
+<?php include ("modules/nav.inc");?>
 
   <!-- 2. MAIN CONTENT AREA -->
   <main id="main-content">
@@ -235,53 +186,7 @@
   </main>
 
   <!-- 3. SITE FOOTER (SHARED ACROSS ALL PAGES) -->
-  <footer>
-    <div class="container">
-      <div class="footer-grid">
-        <div>
-          <h4>NexEdu Technologies</h4>
-          <p>
-            Engineering the Future of Human Learning through resilient educational technologies, uncompromising
-            accessibility standards, and ethical digital research.
-          </p>
-        </div>
-
-        <div>
-          <h4>Navigation</h4>
-          <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="jobs.html">Careers &amp; Open Roles</a></li>
-            <li><a href="apply.html">Submit Application</a></li>
-            <li><a href="about.html">About Team &amp; Unit</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Academic &amp; Project</h4>
-          <ul>
-            <li><a href="https://nextgentechx.atlassian.net/jira/software/projects/NEX/summary" target="_blank" rel="noopener noreferrer">Jira Project Board</a></li>
-            <li><a href="https://github.com/vupaswin/NexEdu-Project" target="_blank" rel="noopener noreferrer">GitHub Repository</a></li>
-            <li><a href="https://vupaswin.github.io/NexEdu-Project/" target="_blank" rel="noopener noreferrer">Live Site (GitHub Pages)</a></li>
-            <li><a href="mailto:careers@nexedu.edu.vn">careers@nexedu.edu.vn</a></li>
-          </ul>
-        </div>
-
-        <div>
-          <h4>Asia-Pacific &amp; Global Hubs</h4>
-          <p>
-            Can Tho Innovation Campus<br>
-            Ninh Kieu District, Can Tho City, Vietnam<br>
-            Phone: +84 857 399 914
-          </p>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
-        <div>&copy; 2026 NexEdu Technologies Pty Ltd. All rights reserved.</div>
-        <div>COS10026 Web Technologies &bull; Part 1</div>
-      </div>
-    </div>
-  </footer>
+  <?php include ("modules/footer.inc");?>
 
 </body>
 
