@@ -13,7 +13,7 @@
       </p>
     </div>
 
-    <!-- Swinburne Mercury Endpoint -->
+    <!-- Changed to process_eoi.php -->
     <form method="post" action="/process_eoi.php" class="card" novalidate>
 
       <!-- FIELDSET 1: POSITION DETAILS -->
