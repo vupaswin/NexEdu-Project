@@ -1,4 +1,12 @@
-<?php include 'header.php'; ?>
+<?php 
+include 'settings.php';
+$sql = "SELECT * FROM about ORDER BY member_id ASC";
+$result = mysqli_query($conn, $sql);
+if (!$result) {
+  die("Cannot load members");
+}
+include 'header.php'; 
+?>
 
   <!-- 2. MAIN CONTENT AREA -->
   <main id="main-content" class="container">
@@ -59,77 +67,48 @@
       <!-- Mandatory Rubric Requirement: Definition List (<dl>, <dt>, <dd>) -->
       <dl>
 
-        <!-- Member 1: Anh Vu Pham -->
-        <div class="card">
-          <dt>
-            <span>Anh Vu Pham</span>
-            <span class="student-id">ID: 106217835</span>
-          </dt>
-          <dd class="role">Master Layout &amp; System Architecture (index.html)</dd>
-          <dd>
-            <strong>Key Contributions:</strong> Sets up the GitHub repository and GitHub Pages deployment workflow, defines baseline styles.css rules (resets, typography, shared navigation, footer), develops index.html (hero background, search interface, accessible table with merged cells), handles final ZIP packaging and Canvas verification, and ensures the production branch builds properly on GitHub Pages.
-          </dd>
-          <dd>
-            <blockquote>
-              &ldquo; Trang web này được vận hành bằng cà phê và sự khủng hoảng hiện sinh..&rdquo;<br>
-              <small>English Translation: "Powered by coffee and existential dread."</small>
-            </blockquote>
-          </dd>
-        </div>
+        <?php
+        while ($member = mysqli_fetch_assoc($result)) {
+          ?>
 
-        <!-- Member 2: Ho Kim Hoan Nguyen -->
-        <div class="card">
-          <dt>
-            <span>Ho Kim Hoan Nguyen</span>
-            <span class="student-id">ID: 106638368</span>
-          </dt>
-          <dd class="role">Information Architecture &amp; Semantic Expert (jobs.html)</dd>
-          <dd>
-            <strong>Key Contributions:</strong> Codes jobs.html following a strict HTML5 semantic hierarchy, including multi-level headings, ordered and unordered lists, multiple section tags, and a right-aligned 25% width aside box, and runs W3C Validator syntax reviews across all HTML and CSS files to enforce zero syntax warnings or errors before integration.
-          </dd>
-          <dd>
-            <blockquote>
-              &ldquo;Những ngày giông bão tạo nên ngày tháng tươi đẹp hơn.&rdquo;<br>
-              <small>English Translation: "Bad days build better days."</small>
-            </blockquote>
-          </dd>
-        </div>
+          <div class ="card">
+            <dt>
+              <span>
+                <?php echo htmlspecialchars($member["full_name"]); ?>
 
-        <!-- Member 3: Nguyen Cao Minh Tat -->
-        <div class="card">
-          <dt>
-            <span>Nguyen Cao Minh Tat</span>
-            <span class="student-id">ID: 10691366</span>
-          </dt>
-          <dd class="role">Team Visuals &amp; Jira Scrum Master (about.html)</dd>
-          <dd>
-            <strong>Key Contributions:</strong> Configures the Jira board (Epics, User Stories, and Sprint backlog) and monitors delivery velocity, builds about.html with nested academic schedule lists, a figure team portrait strictly under 300KB, and an interactive hexadecimal-styled table with a hover state, and acts as the primary team liaison with the tutor.
-          </dd>
-          <dd>
-            <blockquote>
-              &ldquo;Đừng dùng chương đầu tiên của cuộc đời mình để so sánh với chương thứ mười của người khác.&rdquo;<br>
-              <small>English Translation: "Do not compare the first chapter of your life to the tenth chapter of someone else."</small>
-            </blockquote>
-          </dd>
-        </div>
+              </span>
+              <span class = "student_id">
+                ID: <?php echo htmlspecialchars($member["student_id"]); ?>
+              </span>
+            </dt>
+            <dd class = "role" >
+              <?php echo htmlspecialchars($member["part1_role"]); ?>
+            </dd>
+            <dd>
+              <strong>Part 1 Contributions:</strong>
+              <?php echo htmlspecialchars($member["part1_work"]); ?>
+            </dd>
+            <dd class = "role">
+              <?php echo htmlspecialchars($member["part2_role"]); ?>
 
-        <!-- Member 4: Anh Quan Nguyen -->
-        <div class="card">
-          <dt>
-            <span>Anh Quan Nguyen</span>
-            <span class="student-id">ID: 106913272</span>
-          </dt>
-          <dd class="role">Form Logic &amp; Accessibility Lead (apply.html)</dd>
-          <dd>
-            <strong>Key Contributions:</strong> Builds apply.html using a pure Flexbox layout. Implements strict HTML5 validation rules, including regular expression patterns, required constraints, fieldsets/legends, and field types, checks WCAG AA colour contrast, explicit input-label associations, full keyboard navigation, and embeds the formal Indigenous Recognition statement.
-          </dd>
-          <dd>
-            <blockquote>
-              &ldquo;Bạn có thể khóc, có thể chửi, có thể làm bất cứ thứ gì nếu thất bại. Nhưng nếu từ bỏ, thì bạn không khác gì một kẻ thất bại.&rdquo;<br>
-              <small>English Translation: "You can cry, can swear, can do whatever you want if you fail. But if you give up, you are a failure."</small>
-            </blockquote>
-          </dd>
-        </div>
+            </dd>
+            <dd>
+              <strong>Part 2 Contributions:</strong>
+              <?php echo htmlspecialchars($member["part2_work"]); ?>
+            </dd>
+            <dd>
+              <blocquote>
+                <?php echo htmlspecialchars($member["quote"]); ?>
+              </blocquote>
+            
+            </dd>
+          
+
+            
+          </div>
+          <?php
+          }
+          ?>
 
       </dl>
     </section>
