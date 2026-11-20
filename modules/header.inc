@@ -22,8 +22,8 @@
   <!-- Embedded CSS Requirement: Page-specific hero background gradient -->
   <style>
     .hero {
-      background-color: #e0f2fe;
-      background-image: linear-gradient(180deg, #e0f2fe 0%, #f8fafc 100%);
+      background-color: #003d7a;
+      background-image: linear-gradient(135deg, #0a2540 0%, #003d7a 52%, #004b99 100%);
     }
   </style>
 </head>

@@ -100,7 +100,7 @@
             </ul>
           </section>
 
-          <a href="apply.html?job=ED101" class="btn">Apply for Position ED101</a>
+          <a href="apply.php?job=ED101" class="btn">Apply for Position ED101</a>
         </article>
 
         <!-- POSITION 2: ACCESSIBILITY UX DESIGNER (REF: UX204) -->
@@ -152,7 +152,7 @@
             </ul>
           </section>
 
-          <a href="apply.html?job=UX204" class="btn">Apply for Position UX204</a>
+          <a href="apply.php?job=UX204" class="btn">Apply for Position UX204</a>
         </article>
 
       </section>
