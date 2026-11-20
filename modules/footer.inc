@@ -41,7 +41,7 @@
 
       <div class="footer-bottom">
         <div>&copy; 2026 NexEdu Technologies Pty Ltd. All rights reserved.</div>
-        <div>COS10026 Web Technologies &bull; Part 1</div>
+        <div>COS10026 Web Technologies &bull; Part 2</div>
       </div>
     </div>
   </footer>
