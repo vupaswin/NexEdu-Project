@@ -5,7 +5,7 @@ $result = mysqli_query($conn, $sql);
 if (!$result) {
   die("Cannot load members");
 }
-include 'header.php'; 
+include 'modules/header.inc'; 'modules/nav.inc';
 ?>
 
   <!-- 2. MAIN CONTENT AREA -->
@@ -173,7 +173,7 @@ include 'header.php';
     </div>
 
   </main>
-<?php include 'footer.php'; ?>
+<?php include ('modules/footer.inc'); ?>
   
 
 </body>
