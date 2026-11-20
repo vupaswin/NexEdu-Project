@@ -5,7 +5,8 @@ $result = mysqli_query($conn, $sql);
 if (!$result) {
   die("Cannot load members");
 }
-include 'modules/header.inc'; 'modules/nav.inc';
+include ('modules/header.inc'); 
+include ('modules/nav.inc');
 ?>
 
   <!-- 2. MAIN CONTENT AREA -->
