@@ -14,7 +14,7 @@ include ('modules/nav.inc');
 
     <!-- Page Header -->
     <div class="section-header">
-      <span class="badge">Engineering &amp; Design Collective</span>
+      
       <h1>Meet Our Team</h1>
       <p>
         We are Group 03, collaborating to engineer high-standard accessible web solutions and resilient digital learning experiences.
