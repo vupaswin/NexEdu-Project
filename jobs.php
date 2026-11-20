@@ -46,27 +46,29 @@
           <strong>Working Hours:</strong> Mon – Fri, 8:30 AM – 5:30 PM ICT (UTC+7)
         </p>
       </aside>
+      <!-- NEX-90: Preserve 25% floated <aside> sidebar and clearfix container -->
 
-      <!-- Job Listings (Dynamically loaded from MySQL) -->
+      <!-- Job Listings (Dynamically loaded from MySQL - NEX-77) -->
       <section class="jobs-main">
         <h2>Current Open Positions</h2>
 
         <?php
+      // NEX-86: Include database configuration and establish MySQL connection
         require_once("settings.php");
 
-        // Hàm hỗ trợ tách chuỗi theo dòng thành các thẻ <li> (giữ nguyên chuẩn HTML5/WAVE accessibility)
+        // NEX-89: Split semicolon-delimited strings into <li> elements for <ol> and <ul>
         if (!function_exists('renderListItems')) {
             function renderListItems(string $text) {
-                $lines = array_filter(array_map('trim', explode("\n", $text)));
+                $items = array_filter(array_map('trim', explode(";", $text)));
                 $html = "";
-                foreach ($lines as $line) {
-                    $cleanLine = preg_replace('/^(\d+[\.\)]\s*|[\-\*\•]\s*)/', '', $line);
-                    $html .= "<li>" . htmlspecialchars($cleanLine) . "</li>\n";
+                foreach ($items as $item) {
+                    $html .= "<li>" . htmlspecialchars($item) . "</li>\n";
                 }
                 return $html;
             }
         }
 
+        // NEX-86: Connect to MySQL database
         $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
 
         if (!$conn) {
@@ -74,26 +76,29 @@
         } else {
             mysqli_set_charset($conn, "utf8mb4");
 
-            // Truy vấn theo đúng yêu cầu NEX-87
+            // NEX-87: Query database for all open positions ordered by job_ref ascending
             $query = "SELECT * FROM jobs ORDER BY job_ref ASC";
             $result = mysqli_query($conn, $query);
 
             if ($result && mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    $job_ref = htmlspecialchars($row['job_ref']);
-                    $job_title = htmlspecialchars($row['job_title']);
-                    $department = htmlspecialchars($row['department']);
-                    $location = htmlspecialchars($row['location']);
-                    $reports_to = htmlspecialchars($row['reports_to']);
-                    $salary = htmlspecialchars($row['salary']);
-                    $overview = htmlspecialchars($row['overview']);
+              // NEX-88: Iterate through query rows to render semantic <article class="card"> elements
+                while ($job = mysqli_fetch_assoc($result)) {
+                    $job_ref = htmlspecialchars($job['job_ref']);
+                    $job_title = htmlspecialchars($job['job_title']);
+                    $department = htmlspecialchars($job['department']);
+                    $location = htmlspecialchars($job['location']);
+                    $reports_to = htmlspecialchars($job['reports_to']);
+                    $salary = htmlspecialchars($job['salary']);
+                    $overview = htmlspecialchars($job['overview']);
                     $role_id = "role-" . strtolower($job_ref) . "-title";
         ?>
+        <!-- NEX-88: Semantic job card rendered dynamically -->
                     <article class="card">
                       <header>
                         <span class="badge">REF: <?php echo $job_ref; ?></span>
                         <span class="badge"><?php echo $department; ?></span>
                         <span class="badge"><?php echo $location; ?></span>
+
                         <h3 id="<?php echo $role_id; ?>"><?php echo $job_title; ?></h3>
                         <p>Reports to: <strong><?php echo $reports_to; ?></strong></p>
                         <p class="salary">Salary: <?php echo $salary; ?></p>
@@ -108,7 +113,7 @@
                       <section>
                         <h4>Key Responsibilities</h4>
                         <ol>
-                          <?php echo renderListItems($row['responsibilities']); ?>
+                          <?php echo renderListItems($job['responsibilities']); ?>
                         </ol>
                       </section>
 
@@ -117,23 +122,23 @@
                         <h4>Candidate Requirements &amp; Qualifications</h4>
                         <h5>Essential Requirements:</h5>
                         <ul>
-                          <?php echo renderListItems($row['essential_reqs']); ?>
+                          <?php echo renderListItems($job['essential_reqs']); ?>
                         </ul>
 
                         <h5>Highly Desirable &amp; Preferable Qualifications:</h5>
                         <ul>
-                          <?php echo renderListItems($row['preferable_reqs']); ?>
+                          <?php echo renderListItems($job['preferable_reqs']); ?>
                         </ul>
                       </section>
 
-                      <a href="apply.php?job=<?php echo urlencode($row['job_ref']); ?>" class="btn">Apply for Position <?php echo $job_ref; ?></a>
+                      <a href="apply.php?job=<?php echo urlencode($job['job_ref']); ?>" class="btn">Apply for Position <?php echo $job_ref; ?></a>
                     </article>
         <?php
                 }
             } else {
                 echo "<article class='card'><p>No open positions available at the moment.</p></article>";
             }
-
+            // NEX-86: Free result set and close database connection
             if ($result) {
                 mysqli_free_result($result);
             }
