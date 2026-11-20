@@ -5,26 +5,29 @@
   <main id="main-content">
 
     <!-- Hero Section -->
-    <section class="hero">
-      <div class="container">
-        <span class="badge">2026 Engineering &amp; Design Recruitment Drive</span>
-        <h1 id="hero-heading">Engineering the Future of Human Learning</h1>
-        <p>
-          Join our collaborative engineering and experience design teams creating universally accessible,
-          high-performance web applications.
-        </p>
-        <div>
-          <a href="jobs.html" class="btn">Explore Open Positions</a>
-          <a href="about.html" class="btn btn-outline">Meet Our Team</a>
+    <section class="hero hero-showcase" aria-labelledby="hero-heading">
+      <div class="container hero-grid">
+        <div class="hero-content">
+          <h1 id="hero-heading">Engineering the Future of Human Learning</h1>
+          <p>
+            Join our collaborative engineering and experience design teams creating universally accessible,
+            high-performance web applications.
+          </p>
+          <div class="hero-actions">
+            <a href="jobs.php" class="btn btn-hero-primary">Explore Open Positions</a>
+            <a href="about.php" class="btn btn-hero-outline">Meet Our Team</a>
+          </div>
         </div>
 
-        <img src="images/hero-campus.jpg" alt="NexEdu campus building in Can Tho" width="1200" height="440">
+        <div class="hero-media">
+          <img src="images/hero-showcase.png" alt="NexEdu Technologies web platform displayed across a desktop monitor and laptop" width="760" height="402">
+        </div>
       </div>
     </section>
 
     <!-- Search & Filter Box -->
-    <section class="container">
-      <form method="get" action="jobs.html" class="card">
+    <section class="container search-section">
+      <form method="get" action="jobs.php" class="card">
         <div class="form-row">
           <div class="form-group">
             <label for="keyword">Search Positions</label>
