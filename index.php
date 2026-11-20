@@ -8,7 +8,6 @@
     <section class="hero hero-showcase" aria-labelledby="hero-heading">
       <div class="container hero-grid">
         <div class="hero-content">
-          <span class="badge hero-badge">2026 Engineering &amp; Design Recruitment Drive</span>
           <h1 id="hero-heading">Engineering the Future of Human Learning</h1>
           <p>
             Join our collaborative engineering and experience design teams creating universally accessible,

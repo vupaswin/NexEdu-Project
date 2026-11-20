@@ -1,4 +1,5 @@
-<?php include 'header.php'; ?>
+<?php include ("modules/header.inc");?>
+<?php include ("modules/nav.inc");?>
 
   <!-- 2. MAIN CONTENT AREA -->
   <main id="main-content" class="container">
@@ -194,8 +195,7 @@
     </div>
 
   </main>
-<?php include 'footer.php'; ?>
-  
+<?php include ('modules/footer.inc'); ?>  
 
 </body>
 

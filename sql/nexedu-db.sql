@@ -105,6 +105,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Đang đổ dữ liệu cho bảng `users`
+--
+
+INSERT INTO `users` (`username`, `password`, `role`) VALUES
+('admin', '$2y$10$dQcak/AuWxNhqUDXS9IWCOridM.e0EKb4MCXlRKfp4ljkxOGoYwGq', 'manager');
+
+--
 -- Chỉ mục cho các bảng đã đổ
 --
 
@@ -153,7 +160,7 @@ ALTER TABLE `eoi`
 -- AUTO_INCREMENT cho bảng `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
