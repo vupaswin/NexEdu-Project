@@ -12,10 +12,10 @@
         <div>
           <h4>Navigation</h4>
           <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="jobs.html">Careers &amp; Open Roles</a></li>
-            <li><a href="apply.html">Submit Application</a></li>
-            <li><a href="about.html">About Team &amp; Unit</a></li>
+            <li><a href="index.php">Home</a></li>
+            <li><a href="jobs.php">Careers &amp; Open Roles</a></li>
+            <li><a href="apply.php">Submit Application</a></li>
+            <li><a href="about.php">About Team &amp; Unit</a></li>
           </ul>
         </div>
 
@@ -41,7 +41,7 @@
 
       <div class="footer-bottom">
         <div>&copy; 2026 NexEdu Technologies Pty Ltd. All rights reserved.</div>
-        <div>COS10026 Web Technologies &bull; Part 1</div>
+        <div>COS10026 Web Technologies &bull; Part 2</div>
       </div>
     </div>
   </footer>
