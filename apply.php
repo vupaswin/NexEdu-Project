@@ -12,10 +12,14 @@
       </p>
     </div>
 
+    <?php
+    $selected_job = isset($_GET['job']) ? htmlspecialchars(trim($_GET['job'])) : '';
+    ?>
+
     <!-- Changed to process_eoi.php -->
     <form method="post" action="/process_eoi.php" class="card" novalidate>
 
-      <!-- FIELDSET 1: POSITION DETAILS -->
+    <!-- FIELDSET 1: POSITION DETAILS -->
       <fieldset>
         <legend>1. Position Requisition Details</legend>
         <div class="form-group">
@@ -27,10 +31,12 @@
             type="text"
             id="job_ref"
             name="job_ref"
+            value="<?php echo $selected_job; ?>"
             pattern="[A-Z]{2}\d{3}"
             title="2 uppercase letters followed by 3 digits (e.g. ED101 or UX204)"
             maxlength="5"
             placeholder="e.g. ED101"
+            <?php if ($selected_job !== '') echo 'readonly'; ?>
             required
           >
         </div>
