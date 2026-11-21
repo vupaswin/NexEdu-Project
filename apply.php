@@ -6,7 +6,6 @@
   <main id="main-content" class="container">
 
     <div class="section-header">
-      <span class="badge">Online Recruitment Intake</span>
       <h1>Candidate Application Form</h1>
       <p>
         Complete the following verified submission form to register your candidacy. All fields are mandatory except where explicitly indicated as optional.
