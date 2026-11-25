@@ -96,6 +96,7 @@
             mysqli_set_charset($conn, "utf8mb4");
 
             // NEX-110: Secure keyword search using MySQLi Prepared Statements
+            // NEX-112: Execute parameterized query across job_title, department, and job_ref
             $search = isset($_GET['search']) ? trim($_GET['search']) : '';
             $stmt = null;
 
@@ -105,11 +106,9 @@
                           WHERE job_ref LIKE ? 
                              OR job_title LIKE ? 
                              OR department LIKE ? 
-                             OR location LIKE ? 
-                             OR overview LIKE ? 
                           ORDER BY job_ref ASC";
                 $stmt = mysqli_prepare($conn, $query);
-                mysqli_stmt_bind_param($stmt, "sssss", $searchParam, $searchParam, $searchParam, $searchParam, $searchParam);
+                mysqli_stmt_bind_param($stmt, "sss", $searchParam, $searchParam, $searchParam);
                 mysqli_stmt_execute($stmt);
                 $result = mysqli_stmt_get_result($stmt);
             } else {
