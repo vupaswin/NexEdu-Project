@@ -1,23 +1,96 @@
 <?php include ("modules/header.inc");?>
 <?php include ("modules/nav.inc");?>
 
+<?php
+// NEX-113: Read and sanitize search/filter parameters from index.php or jobs.php
+$keyword = "";
+if (isset($_GET['keyword'])) {
+    $keyword = trim($_GET['keyword']);
+} elseif (isset($_GET['search'])) {
+    $keyword = trim($_GET['search']);
+}
+
+$category = isset($_GET['category']) ? trim($_GET['category']) : "";
+$location = isset($_GET['location']) ? trim($_GET['location']) : "";
+
+// Strict whitelist maps matching the <select> options in index.php
+$category_map = [
+    'engineering' => 'Engineering',
+    'design'      => 'Design',
+    'data'        => 'Data'
+];
+
+$location_map = [
+    'cantho' => 'Can Tho',
+    'hcmc'   => 'Ho Chi Minh',
+    'remote' => 'Remote'
+];
+
+if (!array_key_exists($category, $category_map)) {
+    $category = "";
+}
+if (!array_key_exists($location, $location_map)) {
+    $location = "";
+}
+?>
+
   <!--MAIN CONTENT AREA (WITH FLOATED ASIDE ELEMENT)-->
   <main id="main-content" class="container">
 
     <!-- Careers Header Banner -->
     <div class="section-header">
-      <section>
-        <h1>Careers at NexEdu Technologies</h1>
-        <p>
-          Join our team of developers and designers building accessible educational platforms. We offer competitive salaries, flexible hybrid work, and continuous learning opportunities.
-        </p>
-      </section>
+    <section>
+      <h1>Careers at NexEdu Technologies</h1>
+      <p>
+        Join our team of developers and designers building accessible educational platforms. We offer competitive salaries, flexible hybrid work, and continuous learning opportunities.
+      </p>
+    </section>
     </div>
+
+    <!-- NEX-113: Functional Job Search & Filter Bar -->
+    <section class="search-section" aria-label="Search open positions">
+      <form method="get" action="jobs.php" class="card">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="keyword">Search Positions</label>
+            <input
+              type="search"
+              id="keyword"
+              name="keyword"
+              placeholder="e.g. Platform Engineer, UX Designer, ED101..."
+              value="<?php echo htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?>"
+            >
+          </div>
+          <div class="form-group">
+            <label for="category">Discipline</label>
+            <select id="category" name="category">
+              <option value="">All Disciplines</option>
+              <option value="engineering" <?php echo ($category === 'engineering') ? 'selected' : ''; ?>>Platform &amp; Infrastructure</option>
+              <option value="design" <?php echo ($category === 'design') ? 'selected' : ''; ?>>Accessibility &amp; UX Design</option>
+              <option value="data" <?php echo ($category === 'data') ? 'selected' : ''; ?>>Data &amp; Systems Architecture</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="location">Location Model</label>
+            <select id="location" name="location">
+              <option value="">All Locations</option>
+              <option value="cantho" <?php echo ($location === 'cantho') ? 'selected' : ''; ?>>Can Tho (HQ Campus)</option>
+              <option value="hcmc" <?php echo ($location === 'hcmc') ? 'selected' : ''; ?>>Ho Chi Minh City (Hybrid)</option>
+              <option value="remote" <?php echo ($location === 'remote') ? 'selected' : ''; ?>>Remote (Vietnam Wide)</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <button type="submit" class="btn">Search Jobs</button>
+            <a href="jobs.php" class="btn btn-outline">Show All</a>
+          </div>
+        </div>
+      </form>
+    </section>
 
     <!-- Layout Container with Floated Aside & Clearfix -->
     <div class="clearfix">
 
-      <!-- NEX-90: Preserve 25% floated <aside> sidebar and clearfix container -->
+      <!-- RUBRIC REQUIREMENT: <aside> floated right, 25% width, margin, padding, border -->
       <aside>
         <h3 id="sidebar-title">Hiring Process &amp; Info</h3>
 
@@ -46,154 +119,159 @@
           <strong>Working Hours:</strong> Mon – Fri, 8:30 AM – 5:30 PM ICT (UTC+7)
         </p>
       </aside>
+      <!-- NEX-90: Preserve 25% floated <aside> sidebar and clearfix container -->
 
-      <!-- Job Listings (Dynamically loaded from MySQL - NEX-77) -->
+      <!-- Job Listings (Dynamically loaded & filtered from MySQL) -->
       <section class="jobs-main">
         <h2>Current Open Positions</h2>
 
-        <!-- NEX-110: Keyword Search Form (Placed inside .jobs-main to preserve layout) -->
-        <form method="GET" action="jobs.php" class="search-form" style="margin-bottom: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-          <label for="job-search" style="position: absolute; left: -9999px;">Search jobs by keyword</label>
-          <input 
-            type="text" 
-            id="job-search" 
-            name="search" 
-            placeholder="Search by job title, department, or keyword..." 
-            value="<?php echo isset($_GET['search']) ? htmlspecialchars(trim($_GET['search'])) : ''; ?>"
-            style="flex: 1; min-width: 220px; padding: 0.6rem 0.8rem; border: 1px solid #ccc; border-radius: 6px;"
-          >
-          <button type="submit" class="btn">Search Jobs</button>
-          <?php if (!empty(trim($_GET['search'] ?? ''))): ?>
-            <a href="jobs.php" class="btn" style="background-color: #6c757d;">Clear</a>
-          <?php endif; ?>
-        </form>
-
         <?php
-        // NEX-86: Include database configuration and establish MySQL connection
+        // NEX-86: Include database configuration (establishes $conn)
         require_once("settings.php");
 
-        // NEX-89: Split semicolon or newline-delimited strings into clean <li> elements
+        // NEX-89: Split semicolon-delimited strings into <li> elements for <ol> and <ul>
         if (!function_exists('renderListItems')) {
             function renderListItems(string $text) {
-                $raw_items = preg_split('/;|\r\n|\r|\n/', $text);
+                $items = array_filter(array_map('trim', explode(";", $text)));
                 $html = "";
-                foreach ($raw_items as $item) {
-                    $clean = preg_replace('/^(\d+\.\s*|-\s*)/', '', trim($item));
-                    if ($clean !== '') {
-                        $html .= "<li>" . htmlspecialchars($clean) . "</li>\n";
-                    }
+                foreach ($items as $item) {
+                    $html .= "<li>" . htmlspecialchars($item, ENT_QUOTES, 'UTF-8') . "</li>\n";
                 }
                 return $html;
             }
         }
 
-        // NEX-86: Connect to MySQL database
-        $conn = @mysqli_connect($host, $user, $pwd, $sql_db);
+        mysqli_set_charset($conn, "utf8mb4");
 
-        if (!$conn) {
-            echo "<article class='card'><p>Database connection failed. Please try again later.</p></article>";
-        } else {
-            mysqli_set_charset($conn, "utf8mb4");
+        // NEX-113: Build parameterized SQL query from search/filter inputs
+        $where_clauses = [];
+        $param_types   = "";
+        $param_values  = [];
 
-            // NEX-110: Secure keyword search using MySQLi Prepared Statements
-            // NEX-112: Execute parameterized query across job_title, department, and job_ref
-            $search = isset($_GET['search']) ? trim($_GET['search']) : '';
-            $stmt = null;
+        if ($keyword !== "") {
+            $like_kw         = "%" . $keyword . "%";
+            $where_clauses[] = "(job_title LIKE ? OR department LIKE ? OR job_ref LIKE ? OR overview LIKE ?)";
+            $param_types    .= "ssss";
+            $param_values[]  = $like_kw;
+            $param_values[]  = $like_kw;
+            $param_values[]  = $like_kw;
+            $param_values[]  = $like_kw;
+        }
 
-            if ($search !== '') {
-                $searchParam = "%" . $search . "%";
-                $query = "SELECT * FROM jobs 
-                          WHERE job_ref LIKE ? 
-                             OR job_title LIKE ? 
-                             OR department LIKE ? 
-                          ORDER BY job_ref ASC";
-                $stmt = mysqli_prepare($conn, $query);
-                mysqli_stmt_bind_param($stmt, "sss", $searchParam, $searchParam, $searchParam);
-                mysqli_stmt_execute($stmt);
+        if ($category !== "") {
+            $where_clauses[] = "department LIKE ?";
+            $param_types    .= "s";
+            $param_values[]  = "%" . $category_map[$category] . "%";
+        }
+
+        if ($location !== "") {
+            $where_clauses[] = "location LIKE ?";
+            $param_types    .= "s";
+            $param_values[]  = "%" . $location_map[$location] . "%";
+        }
+
+        $sql = "SELECT * FROM jobs";
+        if (!empty($where_clauses)) {
+            $sql .= " WHERE " . implode(" AND ", $where_clauses);
+        }
+        $sql .= " ORDER BY job_ref ASC";
+
+        $jobs = [];
+        $stmt = mysqli_prepare($conn, $sql);
+        if ($stmt) {
+            if ($param_types !== "") {
+                mysqli_stmt_bind_param($stmt, $param_types, ...$param_values);
+            }
+            if (mysqli_stmt_execute($stmt)) {
                 $result = mysqli_stmt_get_result($stmt);
-            } else {
-                // NEX-87: Default query when no search keyword is entered
-                $query = "SELECT * FROM jobs ORDER BY job_ref ASC";
-                $result = mysqli_query($conn, $query);
-            }
-
-            if ($result && mysqli_num_rows($result) > 0) {
-                if ($search!== '') {
-                    echo "<p>Showing <strong>" . mysqli_num_rows($result) . "</strong> result(s) for <em>\"" . htmlspecialchars($search) . "\"</em>:</p>";
+                while ($row = mysqli_fetch_assoc($result)) {
+                    $jobs[] = $row;
                 }
-
-                // NEX-88: Iterate through query rows to render semantic <article class="card"> elements
-                while ($job = mysqli_fetch_assoc($result)) {
-                    $job_ref = htmlspecialchars($job['job_ref']);
-                    $job_title = htmlspecialchars($job['job_title']);
-                    $department = htmlspecialchars($job['department']);
-                    $location = htmlspecialchars($job['location']);
-                    $reports_to = htmlspecialchars($job['reports_to']);
-                    $salary = htmlspecialchars($job['salary']);
-                    $overview = htmlspecialchars($job['overview']);
-                    $role_id = "role-" . strtolower($job_ref) . "-title";
-        ?>
-                    <!-- NEX-88: Semantic job card rendered dynamically -->
-                    <article class="card">
-                      <header>
-                        <span class="badge">REF: <?php echo $job_ref; ?></span>
-                        <span class="badge"><?php echo $department; ?></span>
-                        <span class="badge"><?php echo $location; ?></span>
-
-                        <h3 id="<?php echo $role_id; ?>"><?php echo $job_title; ?></h3>
-                        <p>Reports to: <strong><?php echo $reports_to; ?></strong></p>
-                        <p class="salary">Salary: <?php echo $salary; ?></p>
-                      </header>
-
-                      <section>
-                        <h4>Role Overview</h4>
-                        <p><?php echo nl2br($overview); ?></p>
-                      </section>
-
-                      <!-- NEX-89: Ordered List (<ol>) for Key Responsibilities -->
-                      <section>
-                        <h4>Key Responsibilities</h4>
-                        <ol>
-                          <?php echo renderListItems($job['responsibilities']); ?>
-                        </ol>
-                      </section>
-
-                      <!-- NEX-89: Unordered List (<ul>) for Requirements -->
-                      <section>
-                        <h4>Candidate Requirements &amp; Qualifications</h4>
-                        <h5>Essential Requirements:</h5>
-                        <ul>
-                          <?php echo renderListItems($job['essential_reqs']); ?>
-                        </ul>
-
-                        <h5>Highly Desirable &amp; Preferable Qualifications:</h5>
-                        <ul>
-                          <?php echo renderListItems($job['preferable_reqs']); ?>
-                        </ul>
-                      </section>
-
-                      <a href="apply.php?job=<?php echo urlencode($job['job_ref']); ?>" class="btn">Apply for Position <?php echo $job_ref; ?></a>
-                    </article>
-        <?php
-                }
-            } else {
-                if ($search !== '') {
-                    echo "<article class='card'><p>No open positions matched your search for <strong>\"" . htmlspecialchars($search) . "\"</strong>.</p></article>";
-                } else {
-                    echo "<article class='card'><p>No open positions available at the moment.</p></article>";
-                }
-            }
-
-            // NEX-111 & NEX-86: Close statement, free result set, and close database connection
-            if ($stmt) {
-                mysqli_stmt_close($stmt);
-            }
-            if ($result) {
                 mysqli_free_result($result);
             }
-            mysqli_close($conn);
+            mysqli_stmt_close($stmt);
         }
+        mysqli_close($conn);
         ?>
+
+        <p class="manage-summary">
+          Showing <strong><?php echo count($jobs); ?></strong> open position(s)
+          <?php if ($keyword !== "" || $category !== "" || $location !== ""): ?>
+            &mdash; Active filters:
+            <?php if ($keyword !== ""): ?>
+              <span class="badge">Keyword: <?php echo htmlspecialchars($keyword, ENT_QUOTES, 'UTF-8'); ?></span>
+            <?php endif; ?>
+            <?php if ($category !== ""): ?>
+              <span class="badge">Discipline: <?php echo htmlspecialchars($category_map[$category], ENT_QUOTES, 'UTF-8'); ?></span>
+            <?php endif; ?>
+            <?php if ($location !== ""): ?>
+              <span class="badge">Location: <?php echo htmlspecialchars($location_map[$location], ENT_QUOTES, 'UTF-8'); ?></span>
+            <?php endif; ?>
+          <?php endif; ?>
+        </p>
+
+        <?php if (!empty($jobs)): ?>
+          <?php foreach ($jobs as $job): ?>
+            <?php
+              $job_ref    = htmlspecialchars($job['job_ref'], ENT_QUOTES, 'UTF-8');
+              $job_title  = htmlspecialchars($job['job_title'], ENT_QUOTES, 'UTF-8');
+              $department = htmlspecialchars($job['department'], ENT_QUOTES, 'UTF-8');
+              $job_loc    = htmlspecialchars($job['location'], ENT_QUOTES, 'UTF-8');
+              $reports_to = htmlspecialchars($job['reports_to'], ENT_QUOTES, 'UTF-8');
+              $salary     = htmlspecialchars($job['salary'], ENT_QUOTES, 'UTF-8');
+              $overview   = htmlspecialchars($job['overview'], ENT_QUOTES, 'UTF-8');
+              $role_id    = "role-" . strtolower($job_ref) . "-title";
+            ?>
+            <!-- NEX-88: Semantic job card rendered dynamically -->
+            <article class="card">
+              <header>
+                <span class="badge">REF: <?php echo $job_ref; ?></span>
+                <span class="badge"><?php echo $department; ?></span>
+                <span class="badge"><?php echo $job_loc; ?></span>
+
+                <h3 id="<?php echo $role_id; ?>"><?php echo $job_title; ?></h3>
+                <p>Reports to: <strong><?php echo $reports_to; ?></strong></p>
+                <p class="salary">Salary: <?php echo $salary; ?></p>
+              </header>
+
+              <section>
+                <h4>Role Overview</h4>
+                <p><?php echo nl2br($overview); ?></p>
+              </section>
+
+              <!-- Ordered List (<ol>) for Key Responsibilities -->
+              <section>
+                <h4>Key Responsibilities</h4>
+                <ol>
+                  <?php echo renderListItems($job['responsibilities']); ?>
+                </ol>
+              </section>
+
+              <!-- Unordered List (<ul>) for Requirements -->
+              <section>
+                <h4>Candidate Requirements &amp; Qualifications</h4>
+                <h5>Essential Requirements:</h5>
+                <ul>
+                  <?php echo renderListItems($job['essential_reqs']); ?>
+                </ul>
+
+                <h5>Highly Desirable &amp; Preferable Qualifications:</h5>
+                <ul>
+                  <?php echo renderListItems($job['preferable_reqs']); ?>
+                </ul>
+              </section>
+
+              <a href="apply.php?job=<?php echo urlencode($job['job_ref']); ?>" class="btn">Apply for Position <?php echo $job_ref; ?></a>
+            </article>
+          <?php endforeach; ?>
+        <?php else: ?>
+          <article class="card">
+            <p class="empty-state">
+              No open positions matched your search criteria.
+              <a href="jobs.php">View all open positions</a>.
+            </p>
+          </article>
+        <?php endif; ?>
 
       </section>
     </div>
