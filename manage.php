@@ -78,6 +78,27 @@ $filter_job_ref    = isset($_GET['job_ref']) ? strtoupper(trim($_GET['job_ref'])
 $filter_first_name = isset($_GET['first_name']) ? trim($_GET['first_name']) : "";
 $filter_last_name  = isset($_GET['last_name']) ? trim($_GET['last_name']) : "";
 
+// NEX-303: Strict whitelist validation for dynamic column sorting
+$allowed_sorts  = ['EOInumber', 'job_ref', 'first_name', 'last_name', 'status', 'eoi_date'];
+$requested_sort = isset($_GET['sort']) ? $_GET['sort'] : 'EOInumber';
+$sort_col       = in_array($requested_sort, $allowed_sorts, true) ? $requested_sort : 'EOInumber';
+
+// Helper to build sort links while keeping active search filters
+function build_sort_url(string $column, string $job_ref, string $first_name, string $last_name): string {
+    $params = [];
+    if ($job_ref !== "") {
+        $params['job_ref'] = $job_ref;
+    }
+    if ($first_name !== "") {
+        $params['first_name'] = $first_name;
+    }
+    if ($last_name !== "") {
+        $params['last_name'] = $last_name;
+    }
+    $params['sort'] = $column;
+    return "manage.php?" . http_build_query($params);
+}
+
 // Build WHERE conditions dynamically using prepared statement parameters
 $where_clauses = [];
 $param_types   = "";
@@ -103,14 +124,14 @@ if ($filter_last_name !== "") {
     $param_values[]  = "%" . $filter_last_name . "%";
 }
 
-// NEX-301 (Query 1): Base query to list all EOIs
+// NEX-301 (Query 1) + NEX-303 (Query 6): Select EOIs ordered by whitelisted column
 $sql = "SELECT EOInumber, job_ref, first_name, last_name, dob, gender, address, suburb, state, postcode, email, phone, skills, other_skills, status, eoi_date FROM eoi";
 
 if (!empty($where_clauses)) {
     $sql .= " WHERE " . implode(" AND ", $where_clauses);
 }
 
-$sql .= " ORDER BY EOInumber ASC";
+$sql .= " ORDER BY $sort_col ASC";
 
 $eois = [];
 $query_error = "";
@@ -145,7 +166,7 @@ mysqli_close($conn);
       <h1>HR Management Dashboard</h1>
       <p>
         Signed in as <strong><?php echo htmlspecialchars($_SESSION['admin_username'] ?? 'admin', ENT_QUOTES, 'UTF-8'); ?></strong>.
-        Review, search, and manage candidate Expressions of Interest (EOIs).
+        Review, search, sort, and manage candidate Expressions of Interest (EOIs).
       </p>
       <div class="manage-toolbar">
         <a href="manage.php" class="btn btn-outline">Show All EOIs</a>
@@ -165,14 +186,15 @@ mysqli_close($conn);
       <p class="alert-error" role="alert"><?php echo htmlspecialchars($query_error, ENT_QUOTES, 'UTF-8'); ?></p>
     <?php endif; ?>
 
-    <!-- NEX-301: Query 2 (Job Reference Filter) & Query 3 (Applicant Name Filter) -->
+    <!-- NEX-301 & NEX-303: Search, Filter & Sort Controls -->
     <section class="card" aria-labelledby="filter-heading">
-      <h2 id="filter-heading">Search &amp; Filter Applications</h2>
+      <h2 id="filter-heading">Search, Filter &amp; Sort Applications</h2>
 
       <div class="manage-grid">
         <!-- Query 2: Filter by Job Reference -->
         <form method="get" action="manage.php" class="manage-panel">
           <h3>Filter by Job Reference</h3>
+          <input type="hidden" name="sort" value="<?php echo htmlspecialchars($sort_col, ENT_QUOTES, 'UTF-8'); ?>">
           <div class="form-group">
             <label for="filter_job_ref">Job Reference (e.g. ED101, UX204)</label>
             <input
@@ -190,6 +212,7 @@ mysqli_close($conn);
         <!-- Query 3: Filter by Applicant Name -->
         <form method="get" action="manage.php" class="manage-panel">
           <h3>Filter by Applicant Name</h3>
+          <input type="hidden" name="sort" value="<?php echo htmlspecialchars($sort_col, ENT_QUOTES, 'UTF-8'); ?>">
           <div class="form-row">
             <div class="form-group">
               <label for="filter_first_name">First Name</label>
@@ -215,6 +238,32 @@ mysqli_close($conn);
             </div>
           </div>
           <button type="submit" class="btn">Search Applicant</button>
+        </form>
+
+        <!-- Query 6: Sort Dropdown -->
+        <form method="get" action="manage.php" class="manage-panel">
+          <h3>Sort Applications</h3>
+          <?php if ($filter_job_ref !== ""): ?>
+            <input type="hidden" name="job_ref" value="<?php echo htmlspecialchars($filter_job_ref, ENT_QUOTES, 'UTF-8'); ?>">
+          <?php endif; ?>
+          <?php if ($filter_first_name !== ""): ?>
+            <input type="hidden" name="first_name" value="<?php echo htmlspecialchars($filter_first_name, ENT_QUOTES, 'UTF-8'); ?>">
+          <?php endif; ?>
+          <?php if ($filter_last_name !== ""): ?>
+            <input type="hidden" name="last_name" value="<?php echo htmlspecialchars($filter_last_name, ENT_QUOTES, 'UTF-8'); ?>">
+          <?php endif; ?>
+          <div class="form-group">
+            <label for="sort">Sort Column (Ascending)</label>
+            <select id="sort" name="sort">
+              <option value="EOInumber" <?php echo ($sort_col === 'EOInumber') ? 'selected' : ''; ?>>EOI Number (ID)</option>
+              <option value="job_ref" <?php echo ($sort_col === 'job_ref') ? 'selected' : ''; ?>>Job Reference</option>
+              <option value="first_name" <?php echo ($sort_col === 'first_name') ? 'selected' : ''; ?>>First Name</option>
+              <option value="last_name" <?php echo ($sort_col === 'last_name') ? 'selected' : ''; ?>>Last Name</option>
+              <option value="status" <?php echo ($sort_col === 'status') ? 'selected' : ''; ?>>Status</option>
+              <option value="eoi_date" <?php echo ($sort_col === 'eoi_date') ? 'selected' : ''; ?>>Submission Date</option>
+            </select>
+          </div>
+          <button type="submit" class="btn">Apply Sort</button>
         </form>
       </div>
     </section>
@@ -242,11 +291,12 @@ mysqli_close($conn);
       </form>
     </section>
 
-    <!-- NEX-301 & NEX-302: EOI Table with Row Status Mutation -->
+    <!-- NEX-301, NEX-302 & NEX-303: EOI Table with Whitelist Column Sort Links -->
     <section class="card" aria-labelledby="results-heading">
       <h2 id="results-heading">Candidate Expressions of Interest (EOIs)</h2>
       <p class="manage-summary">
-        Showing <strong><?php echo count($eois); ?></strong> application(s)
+        Showing <strong><?php echo count($eois); ?></strong> application(s) &bull;
+        Sorted by <strong><?php echo htmlspecialchars($sort_col, ENT_QUOTES, 'UTF-8'); ?></strong> (ASC)
         <?php if ($filter_job_ref !== "" || $filter_first_name !== "" || $filter_last_name !== ""): ?>
           &mdash; Active filters:
           <?php if ($filter_job_ref !== ""): ?>
@@ -266,20 +316,44 @@ mysqli_close($conn);
       <?php else: ?>
         <div class="table-wrap">
           <table>
-            <caption>Table: Submitted Candidate Expressions of Interest</caption>
+            <caption>Table: Submitted Candidate Expressions of Interest (Click highlighted headers to sort)</caption>
             <thead>
               <tr>
-                <th scope="col">EOI #</th>
-                <th scope="col">Job Ref</th>
-                <th scope="col">First Name</th>
-                <th scope="col">Last Name</th>
+                <th scope="col" <?php echo ($sort_col === 'EOInumber') ? 'aria-sort="ascending"' : ''; ?>>
+                  <a class="sort-link<?php echo ($sort_col === 'EOInumber') ? ' active-sort' : ''; ?>" href="<?php echo htmlspecialchars(build_sort_url('EOInumber', $filter_job_ref, $filter_first_name, $filter_last_name), ENT_QUOTES, 'UTF-8'); ?>">
+                    EOI #<?php echo ($sort_col === 'EOInumber') ? ' &#9650;' : ''; ?>
+                  </a>
+                </th>
+                <th scope="col" <?php echo ($sort_col === 'job_ref') ? 'aria-sort="ascending"' : ''; ?>>
+                  <a class="sort-link<?php echo ($sort_col === 'job_ref') ? ' active-sort' : ''; ?>" href="<?php echo htmlspecialchars(build_sort_url('job_ref', $filter_job_ref, $filter_first_name, $filter_last_name), ENT_QUOTES, 'UTF-8'); ?>">
+                    Job Ref<?php echo ($sort_col === 'job_ref') ? ' &#9650;' : ''; ?>
+                  </a>
+                </th>
+                <th scope="col" <?php echo ($sort_col === 'first_name') ? 'aria-sort="ascending"' : ''; ?>>
+                  <a class="sort-link<?php echo ($sort_col === 'first_name') ? ' active-sort' : ''; ?>" href="<?php echo htmlspecialchars(build_sort_url('first_name', $filter_job_ref, $filter_first_name, $filter_last_name), ENT_QUOTES, 'UTF-8'); ?>">
+                    First Name<?php echo ($sort_col === 'first_name') ? ' &#9650;' : ''; ?>
+                  </a>
+                </th>
+                <th scope="col" <?php echo ($sort_col === 'last_name') ? 'aria-sort="ascending"' : ''; ?>>
+                  <a class="sort-link<?php echo ($sort_col === 'last_name') ? ' active-sort' : ''; ?>" href="<?php echo htmlspecialchars(build_sort_url('last_name', $filter_job_ref, $filter_first_name, $filter_last_name), ENT_QUOTES, 'UTF-8'); ?>">
+                    Last Name<?php echo ($sort_col === 'last_name') ? ' &#9650;' : ''; ?>
+                  </a>
+                </th>
                 <th scope="col">Email</th>
                 <th scope="col">Phone</th>
                 <th scope="col">State</th>
                 <th scope="col">Skills</th>
-                <th scope="col">Status</th>
+                <th scope="col" <?php echo ($sort_col === 'status') ? 'aria-sort="ascending"' : ''; ?>>
+                  <a class="sort-link<?php echo ($sort_col === 'status') ? ' active-sort' : ''; ?>" href="<?php echo htmlspecialchars(build_sort_url('status', $filter_job_ref, $filter_first_name, $filter_last_name), ENT_QUOTES, 'UTF-8'); ?>">
+                    Status<?php echo ($sort_col === 'status') ? ' &#9650;' : ''; ?>
+                  </a>
+                </th>
                 <th scope="col">Update Status</th>
-                <th scope="col">Submitted</th>
+                <th scope="col" <?php echo ($sort_col === 'eoi_date') ? 'aria-sort="ascending"' : ''; ?>>
+                  <a class="sort-link<?php echo ($sort_col === 'eoi_date') ? ' active-sort' : ''; ?>" href="<?php echo htmlspecialchars(build_sort_url('eoi_date', $filter_job_ref, $filter_first_name, $filter_last_name), ENT_QUOTES, 'UTF-8'); ?>">
+                    Submitted<?php echo ($sort_col === 'eoi_date') ? ' &#9650;' : ''; ?>
+                  </a>
+                </th>
               </tr>
             </thead>
             <tbody>
