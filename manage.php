@@ -10,6 +10,69 @@ if (!isset($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== tru
 require_once("settings.php");
 mysqli_set_charset($conn, "utf8mb4");
 
+$success_msg = "";
+$error_msg   = "";
+
+// NEX-302: Handle POST mutations (Delete by Job Reference & Update EOI Status)
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $action = $_POST['action'] ?? '';
+
+    // Query 4: Delete all EOIs for a specified Job Reference
+    if ($action === 'delete_by_job_ref') {
+        $del_job_ref = isset($_POST['delete_job_ref']) ? strtoupper(trim($_POST['delete_job_ref'])) : "";
+
+        if ($del_job_ref === "" || !preg_match('/^[A-Z0-9]{1,5}$/', $del_job_ref)) {
+            $error_msg = "Please enter a valid Job Reference (1 to 5 letters/digits, e.g. ED101).";
+        } else {
+            $del_stmt = mysqli_prepare($conn, "DELETE FROM eoi WHERE job_ref = ?");
+            if ($del_stmt) {
+                mysqli_stmt_bind_param($del_stmt, "s", $del_job_ref);
+                if (mysqli_stmt_execute($del_stmt)) {
+                    $deleted_count = mysqli_stmt_affected_rows($del_stmt);
+                    if ($deleted_count > 0) {
+                        $success_msg = "Deleted $deleted_count EOI record(s) for Job Reference $del_job_ref.";
+                    } else {
+                        $success_msg = "No EOI records found for Job Reference $del_job_ref (0 deleted).";
+                    }
+                } else {
+                    $error_msg = "Failed to delete EOI records. Please try again.";
+                }
+                mysqli_stmt_close($del_stmt);
+            } else {
+                $error_msg = "Unable to prepare delete statement.";
+            }
+        }
+    }
+
+    // Query 5: Update EOI status ('New', 'Current', or 'Final')
+    if ($action === 'update_status') {
+        $eoi_number_raw = $_POST['eoi_number'] ?? '';
+        $new_status     = isset($_POST['status']) ? trim($_POST['status']) : '';
+        $eoi_number     = filter_var($eoi_number_raw, FILTER_VALIDATE_INT);
+
+        $allowed_statuses = ['New', 'Current', 'Final'];
+
+        if ($eoi_number === false || $eoi_number <= 0) {
+            $error_msg = "Invalid EOI number provided for status update.";
+        } elseif (!in_array($new_status, $allowed_statuses, true)) {
+            $error_msg = "Invalid status value. Allowed values: New, Current, Final.";
+        } else {
+            $upd_stmt = mysqli_prepare($conn, "UPDATE eoi SET status = ? WHERE EOInumber = ?");
+            if ($upd_stmt) {
+                mysqli_stmt_bind_param($upd_stmt, "si", $new_status, $eoi_number);
+                if (mysqli_stmt_execute($upd_stmt)) {
+                    $success_msg = "Updated EOI #$eoi_number status to '$new_status'.";
+                } else {
+                    $error_msg = "Failed to update status for EOI #$eoi_number.";
+                }
+                mysqli_stmt_close($upd_stmt);
+            } else {
+                $error_msg = "Unable to prepare status update statement.";
+            }
+        }
+    }
+}
+
 // Read and trim GET filter inputs
 $filter_job_ref    = isset($_GET['job_ref']) ? strtoupper(trim($_GET['job_ref'])) : "";
 $filter_first_name = isset($_GET['first_name']) ? trim($_GET['first_name']) : "";
@@ -90,6 +153,14 @@ mysqli_close($conn);
       </div>
     </div>
 
+    <?php if ($success_msg !== ""): ?>
+      <p class="alert-success" role="status"><?php echo htmlspecialchars($success_msg, ENT_QUOTES, 'UTF-8'); ?></p>
+    <?php endif; ?>
+
+    <?php if ($error_msg !== ""): ?>
+      <p class="alert-error" role="alert"><?php echo htmlspecialchars($error_msg, ENT_QUOTES, 'UTF-8'); ?></p>
+    <?php endif; ?>
+
     <?php if ($query_error !== ""): ?>
       <p class="alert-error" role="alert"><?php echo htmlspecialchars($query_error, ENT_QUOTES, 'UTF-8'); ?></p>
     <?php endif; ?>
@@ -148,7 +219,30 @@ mysqli_close($conn);
       </div>
     </section>
 
-    <!-- NEX-301: Query 1 (List All / Filtered EOIs in Tabular View) -->
+    <!-- NEX-302 (Query 4): Delete all EOIs by Job Reference -->
+    <section class="card" aria-labelledby="delete-heading">
+      <h2 id="delete-heading">Delete Applications by Job Reference</h2>
+      <p>Remove all obsolete EOI records matching a specific Job Reference number.</p>
+      <form method="post" action="manage.php" class="form-row">
+        <input type="hidden" name="action" value="delete_by_job_ref">
+        <div class="form-group">
+          <label for="delete_job_ref">Job Reference to Delete *</label>
+          <input
+            type="text"
+            id="delete_job_ref"
+            name="delete_job_ref"
+            maxlength="5"
+            placeholder="e.g. ED101"
+            required
+          >
+        </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-danger">Delete Matching EOIs</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- NEX-301 & NEX-302: EOI Table with Row Status Mutation -->
     <section class="card" aria-labelledby="results-heading">
       <h2 id="results-heading">Candidate Expressions of Interest (EOIs)</h2>
       <p class="manage-summary">
@@ -184,13 +278,15 @@ mysqli_close($conn);
                 <th scope="col">State</th>
                 <th scope="col">Skills</th>
                 <th scope="col">Status</th>
+                <th scope="col">Update Status</th>
                 <th scope="col">Submitted</th>
               </tr>
             </thead>
             <tbody>
               <?php foreach ($eois as $row): ?>
                 <?php
-                  $status_val = $row['status'] ?? 'New';
+                  $eoi_id       = (int) $row['EOInumber'];
+                  $status_val   = $row['status'] ?? 'New';
                   $status_class = 'status-new';
                   if ($status_val === 'Current') {
                       $status_class = 'status-current';
@@ -199,7 +295,7 @@ mysqli_close($conn);
                   }
                 ?>
                 <tr>
-                  <td><?php echo (int) $row['EOInumber']; ?></td>
+                  <td><?php echo $eoi_id; ?></td>
                   <td><strong><?php echo htmlspecialchars($row['job_ref'], ENT_QUOTES, 'UTF-8'); ?></strong></td>
                   <td><?php echo htmlspecialchars($row['first_name'], ENT_QUOTES, 'UTF-8'); ?></td>
                   <td><?php echo htmlspecialchars($row['last_name'], ENT_QUOTES, 'UTF-8'); ?></td>
@@ -211,6 +307,20 @@ mysqli_close($conn);
                     <span class="status-badge <?php echo $status_class; ?>">
                       <?php echo htmlspecialchars($status_val, ENT_QUOTES, 'UTF-8'); ?>
                     </span>
+                  </td>
+                  <td>
+                    <!-- NEX-302 (Query 5): Update status dropdown -->
+                    <form method="post" action="manage.php" class="status-form">
+                      <input type="hidden" name="action" value="update_status">
+                      <input type="hidden" name="eoi_number" value="<?php echo $eoi_id; ?>">
+                      <label for="status_<?php echo $eoi_id; ?>" class="sr-only">Status for EOI <?php echo $eoi_id; ?></label>
+                      <select id="status_<?php echo $eoi_id; ?>" name="status">
+                        <option value="New" <?php echo ($status_val === 'New') ? 'selected' : ''; ?>>New</option>
+                        <option value="Current" <?php echo ($status_val === 'Current') ? 'selected' : ''; ?>>Current</option>
+                        <option value="Final" <?php echo ($status_val === 'Final') ? 'selected' : ''; ?>>Final</option>
+                      </select>
+                      <button type="submit" class="btn btn-sm">Save</button>
+                    </form>
                   </td>
                   <td><?php echo htmlspecialchars($row['eoi_date'], ENT_QUOTES, 'UTF-8'); ?></td>
                 </tr>
