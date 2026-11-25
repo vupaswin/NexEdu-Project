@@ -57,13 +57,13 @@
           <input 
             type="text" 
             id="job-search" 
-            name="keyword" 
+            name="search" 
             placeholder="Search by job title, department, or keyword..." 
-            value="<?php echo isset($_GET['keyword']) ? htmlspecialchars(trim($_GET['keyword'])) : ''; ?>"
+            value="<?php echo isset($_GET['search']) ? htmlspecialchars(trim($_GET['search'])) : ''; ?>"
             style="flex: 1; min-width: 220px; padding: 0.6rem 0.8rem; border: 1px solid #ccc; border-radius: 6px;"
           >
-          <button type="submit" class="btn">Search</button>
-          <?php if (!empty(trim($_GET['keyword'] ?? ''))): ?>
+          <button type="submit" class="btn">Search Jobs</button>
+          <?php if (!empty(trim($_GET['search'] ?? ''))): ?>
             <a href="jobs.php" class="btn" style="background-color: #6c757d;">Clear</a>
           <?php endif; ?>
         </form>
@@ -96,11 +96,11 @@
             mysqli_set_charset($conn, "utf8mb4");
 
             // NEX-110: Secure keyword search using MySQLi Prepared Statements
-            $keyword = isset($_GET['keyword']) ? trim($_GET['keyword']) : '';
+            $search = isset($_GET['search']) ? trim($_GET['search']) : '';
             $stmt = null;
 
-            if ($keyword !== '') {
-                $searchParam = "%" . $keyword . "%";
+            if ($search !== '') {
+                $searchParam = "%" . $search . "%";
                 $query = "SELECT * FROM jobs 
                           WHERE job_ref LIKE ? 
                              OR job_title LIKE ? 
@@ -119,8 +119,8 @@
             }
 
             if ($result && mysqli_num_rows($result) > 0) {
-                if ($keyword !== '') {
-                    echo "<p>Showing <strong>" . mysqli_num_rows($result) . "</strong> result(s) for <em>\"" . htmlspecialchars($keyword) . "\"</em>:</p>";
+                if ($search!== '') {
+                    echo "<p>Showing <strong>" . mysqli_num_rows($result) . "</strong> result(s) for <em>\"" . htmlspecialchars($search) . "\"</em>:</p>";
                 }
 
                 // NEX-88: Iterate through query rows to render semantic <article class="card"> elements
@@ -178,14 +178,14 @@
         <?php
                 }
             } else {
-                if ($keyword !== '') {
-                    echo "<article class='card'><p>No open positions matched your search for <strong>\"" . htmlspecialchars($keyword) . "\"</strong>.</p></article>";
+                if ($search !== '') {
+                    echo "<article class='card'><p>No open positions matched your search for <strong>\"" . htmlspecialchars($search) . "\"</strong>.</p></article>";
                 } else {
                     echo "<article class='card'><p>No open positions available at the moment.</p></article>";
                 }
             }
 
-            // NEX-110 & NEX-86: Close statement, free result set, and close database connection
+            // NEX-111 & NEX-86: Close statement, free result set, and close database connection
             if ($stmt) {
                 mysqli_stmt_close($stmt);
             }
